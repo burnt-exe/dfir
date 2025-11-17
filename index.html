@@ -5,16 +5,13 @@
 <title>NIST Detect Function Quiz</title>
 <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-100 text-gray-800">
+<body class="bg-gray-100 text-gray-900">
 
-<div class="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-md">
-    <h1 class="text-3xl font-bold mb-4 text-blue-700">NIST SP 800-61 Rev 3 – Detect Function Quiz</h1>
-    <p class="mb-6 text-gray-600">Answer the 20 questions below. Results display instantly when submitted.</p>
+<div class="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-xl shadow">
+    <h1 class="text-3xl font-bold text-blue-700 mb-4">NIST SP 800-61 Rev 3 – Detect Function Quiz</h1>
+    <p class="text-gray-600 mb-6">Choose the correct option from each dropdown. Your score will appear after submission.</p>
 
-    <form id="quizForm" class="space-y-6">
-
-        <!-- Questions generated dynamically below -->
-    </form>
+    <form id="quizForm" class="space-y-6"></form>
 
     <button onclick="submitQuiz()"
         class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg text-lg font-semibold">
@@ -28,124 +25,235 @@
 const quizData = [
     {
         q: "What is the main purpose of the Detect function in NIST SP 800-61 Rev 3?",
-        a: "B. To identify that a cybersecurity incident is occurring"
+        options: [
+            "A. To restore affected systems and resume operations",
+            "B. To identify that a cybersecurity incident is occurring",
+            "C. To manage resources and assign responsibilities",
+            "D. To prepare backups and response procedures"
+        ],
+        a: "B"
     },
     {
         q: "Why is tuning monitoring technologies important in detection activities?",
-        a: "A. It reduces false positives and false negatives to acceptable levels"
+        options: [
+            "A. It reduces false positives and false negatives to acceptable levels",
+            "B. It automatically blocks all suspicious network connections",
+            "C. It prevents employees from accessing external websites",
+            "D. It encrypts monitoring logs for long-term storage"
+        ],
+        a: "A"
     },
     {
         q: "What is Continuous Monitoring (DE.CM) mainly used for?",
-        a: "B. Monitoring assets to find anomalies and IoCs"
+        options: [
+            "A. Managing encryption keys and backups",
+            "B. Monitoring assets to find anomalies and IoCs",
+            "C. Scheduling maintenance of servers",
+            "D. Recording network uptime statistics"
+        ],
+        a: "B"
     },
     {
         q: "What is Adverse Event Analysis (DE.AE)?",
-        a: "B. Analyzing anomalies to detect incidents"
+        options: [
+            "A. Reviewing financial transactions for fraud",
+            "B. Analyzing anomalies to detect incidents",
+            "C. Testing backup procedures for recovery",
+            "D. Logging failed login attempts only"
+        ],
+        a: "B"
     },
     {
         q: "Which tool type correlates large datasets for threat detection?",
-        a: "A. SIEM systems"
+        options: ["A. SIEM systems", "B. Backup utilities", "C. Patch managers", "D. Firewalls only"],
+        a: "A"
     },
     {
         q: "Which system type automates responses to detected threats?",
-        a: "A. SOAR platforms"
+        options: ["A. SOAR platforms", "B. IDS sensors", "C. DNS servers", "D. Log archives"],
+        a: "A"
     },
     {
         q: "What is the key purpose of integrating Cyber Threat Intelligence (CTI) into detection?",
-        a: "A. To improve detection accuracy using current threat data"
+        options: [
+            "A. To improve detection accuracy using current threat data",
+            "B. To encrypt all collected evidence",
+            "C. To replace SIEM and EDR systems",
+            "D. To remove false positives completely"
+        ],
+        a: "A"
     },
     {
         q: "What question does detection aim to answer?",
-        a: "B. Is something malicious happening in our environment?"
+        options: [
+            "A. Who is responsible for the breach?",
+            "B. Is something malicious happening in our environment?",
+            "C. How long will recovery take?",
+            "D. When was the last backup completed?"
+        ],
+        a: "B"
     },
     {
         q: "Which platform is an open-source SIEM stack?",
-        a: "A. ELK Stack (Elasticsearch, Logstash, Kibana)"
+        options: [
+            "A. ELK Stack (Elasticsearch, Logstash, Kibana)",
+            "B. Microsoft Defender Suite",
+            "C. Cisco Firepower NextGen",
+            "D. Palo Alto Threat Prevention"
+        ],
+        a: "A"
     },
     {
         q: "Which example is an Endpoint Detection and Response (EDR) tool?",
-        a: "B. CrowdStrike Falcon"
+        options: [
+            "A. Suricata",
+            "B. CrowdStrike Falcon",
+            "C. Zeek",
+            "D. Wireshark"
+        ],
+        a: "B"
     },
     {
         q: "What does Wireshark primarily do?",
-        a: "B. Captures and inspects network traffic"
+        options: [
+            "A. Filters malicious emails",
+            "B. Captures and inspects network traffic",
+            "C. Encrypts network sessions",
+            "D. Monitors system uptime"
+        ],
+        a: "B"
     },
     {
         q: "What is a False Positive in security monitoring?",
-        a: "B. Legitimate activity flagged as malicious"
+        options: [
+            "A. A real attack missed by defenses",
+            "B. Legitimate activity flagged as malicious",
+            "C. Malware that deletes logs",
+            "D. Alert triggered by outdated antivirus"
+        ],
+        a: "B"
     },
     {
         q: "What is a False Negative?",
-        a: "B. A real attack that goes undetected"
+        options: [
+            "A. A harmless event logged as a failure",
+            "B. A real attack that goes undetected",
+            "C. A user error corrected automatically",
+            "D. An email misclassified as spam"
+        ],
+        a: "B"
     },
     {
         q: "Why must security teams balance detection sensitivity?",
-        a: "A. To reduce both false positives and false negatives"
+        options: [
+            "A. To reduce both false positives and false negatives",
+            "B. To ensure faster network speeds only",
+            "C. To avoid running out of storage space",
+            "D. To make all alerts identical"
+        ],
+        a: "A"
     },
     {
         q: "What is event correlation used for?",
-        a: "A. Linking related security events into meaningful patterns"
+        options: [
+            "A. Linking related security events into meaningful patterns",
+            "B. Sorting logs by alphabetical order",
+            "C. Archiving old event files",
+            "D. Encrypting network captures"
+        ],
+        a: "A"
     },
     {
         q: "What happens without effective correlation?",
-        a: "B. Analysts suffer from alert fatigue"
+        options: [
+            "A. Backup files become unreadable",
+            "B. Analysts suffer from alert fatigue",
+            "C. Firewalls stop sending logs",
+            "D. All threats are blocked automatically"
+        ],
+        a: "B"
     },
     {
         q: "Which method validates incidents by checking IoCs in databases like VirusTotal?",
-        a: "A. Threat Intelligence verification"
+        options: [
+            "A. Threat Intelligence verification",
+            "B. Backup comparison",
+            "C. Encryption auditing",
+            "D. Patch testing"
+        ],
+        a: "A"
     },
     {
         q: "In the response escalation chain, who should detect and report first?",
-        a: "C. Regular users"
+        options: [
+            "A. External agencies",
+            "B. Help Desk teams",
+            "C. Regular users",
+            "D. SOC analysts"
+        ],
+        a: "C"
     },
     {
         q: "What is the key difference between IDS and IPS?",
-        a: "A. IDS alerts while IPS blocks threats"
+        options: [
+            "A. IDS alerts while IPS blocks threats",
+            "B. IDS blocks traffic while IPS alerts",
+            "C. Both always block malicious traffic",
+            "D. Both only monitor application logs"
+        ],
+        a: "A"
     },
     {
-        q: "Why should organizations train staff to recognize the difference between normal errors and potential cyber threats?",
-        a: "B. To prevent false alarms and improve accurate incident reporting"
+        q: "Why should organizations train staff to recognize normal errors vs potential threats?",
+        options: [
+            "A. To reduce confusion during updates",
+            "B. To prevent false alarms and improve accurate reporting",
+            "C. To allow users to restart systems freely",
+            "D. To avoid using monitoring tools"
+        ],
+        a: "B"
     }
 ];
 
+// Render quiz
 const quizForm = document.getElementById("quizForm");
-
 quizData.forEach((item, index) => {
-    const qBlock = `
+    let html = `
         <div>
-            <p class="font-semibold">${index + 1}. ${item.q}</p>
-            <input type="text" name="q${index}" placeholder="Type your answer letter (A/B/C/D)"
-                class="mt-2 p-2 border rounded w-full" />
-        </div>`;
-    quizForm.innerHTML += qBlock;
+            <p class="font-semibold mb-2">${index + 1}. ${item.q}</p>
+            <select name="q${index}" class="p-2 border rounded w-full">
+                <option value="">Select an answer...</option>
+                ${item.options.map(op => `<option value="${op.charAt(0)}">${op}</option>`).join("")}
+            </select>
+        </div>
+    `;
+    quizForm.innerHTML += html;
 });
 
+// Evaluate quiz
 function submitQuiz() {
     let score = 0;
-
     quizData.forEach((item, index) => {
-        const userAnswer = document.querySelector(`input[name="q${index}"]`).value.trim().toUpperCase();
-        const correct = item.a.charAt(0);
-
-        if (userAnswer === correct) score++;
+        const selected = document.querySelector(`select[name="q${index}"]`).value;
+        if (selected === item.a) score++;
     });
 
-    const resultBox = document.getElementById("result");
-    resultBox.classList.remove("hidden");
+    const result = document.getElementById("result");
+    result.classList.remove("hidden");
 
     if (score >= 16) {
-        resultBox.className = "mt-6 p-4 rounded-lg bg-green-100 text-green-800";
+        result.className = "mt-6 p-4 rounded-lg bg-green-100 text-green-800";
     } else if (score >= 10) {
-        resultBox.className = "mt-6 p-4 rounded-lg bg-yellow-100 text-yellow-800";
+        result.className = "mt-6 p-4 rounded-lg bg-yellow-100 text-yellow-800";
     } else {
-        resultBox.className = "mt-6 p-4 rounded-lg bg-red-100 text-red-800";
+        result.className = "mt-6 p-4 rounded-lg bg-red-100 text-red-800";
     }
 
-    resultBox.innerHTML = `
-        <h2 class="text-xl font-bold">Your Score: ${score} / ${quizData.length}</h2>
+    result.innerHTML = `
+        <h2 class="text-xl font-bold">Your Score: ${score}/20</h2>
         <p class="mt-2">Correct Answers:</p>
         <ul class="list-disc ml-6 mt-1 text-sm">
-            ${quizData.map((i, idx) => `<li><strong>${idx + 1}</strong>: ${i.a}</li>`).join("")}
+            ${quizData.map((i, idx) => `<li><strong>${idx + 1}:</strong> ${i.a}</li>`).join("")}
         </ul>
     `;
 }
