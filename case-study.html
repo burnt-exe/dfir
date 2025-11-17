@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stuxnet (2010) – DFIR Case Study</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+
+<body class="bg-gray-100 text-gray-900 leading-relaxed">
+
+<!-- NAVBAR -->
+<nav class="bg-blue-900 text-white shadow-lg">
+  <div class="max-w-6xl mx-auto px-6 py-4 flex items-center justify-between">
+    <h1 class="text-xl font-bold tracking-wide">Stuxnet (2010)</h1>
+    <div class="space-x-6 text-sm font-semibold">
+      <a href="#what-happened" class="hover:text-blue-300">What Happened</a>
+      <a href="#impact" class="hover:text-blue-300">Impact</a>
+      <a href="#why-it-matters" class="hover:text-blue-300">Why It Matters</a>
+      <a href="#quote" class="hover:text-blue-300">Quote</a>
+      <a href="#references" class="hover:text-blue-300">Sources</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<header class="bg-white py-14 shadow">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-4xl font-extrabold text-blue-800">Stuxnet Cyberattack (2010)</h2>
+    <p class="text-lg text-gray-700 mt-3 max-w-3xl">
+      The first cyberattack in history to cause physical destruction to critical infrastructure.
+      This DFIR case study covers what happened, the operational impact, and why it changed cybersecurity forever.
+    </p>
+
+    <img src="https://upload.wikimedia.org/wikipedia/commons/3/3b/Iran_Nuclear_Facility.png"
+         class="mt-8 w-full rounded-xl shadow-lg"
+         alt="Natanz Nuclear Facility (Iran)">
+  </div>
+</header>
+
+<main class="max-w-6xl mx-auto px-6 py-12 space-y-20">
+
+  <!-- SECTION 1: WHAT HAPPENED -->
+  <section id="what-happened">
+    <h3 class="text-3xl font-bold text-blue-700 mb-4">1. What Happened?</h3>
+
+    <div class="bg-white p-8 rounded-xl shadow-lg text-gray-800 space-y-4">
+
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Stuxnet.png"
+           class="rounded-xl shadow mb-4"
+           alt="Stuxnet Malware Architecture Diagram">
+
+      <p><strong>Summary:</strong><br>
+      Stuxnet was a highly advanced malware worm created to sabotage Iran’s nuclear enrichment program by altering the speed of uranium centrifuges inside Natanz.</p>
+
+      <p><strong>Who Was Targeted?</strong><br>
+      The primary target was the <strong>Natanz Nuclear Facility in Iran</strong>, specifically the Siemens Step7 industrial control systems (ICS) operating gas centrifuges.</p>
+
+      <p><strong>Type of Attack:</strong><br>
+        This was a <strong>nation-state cyber weapon</strong> using:
+        <ul class="list-disc ml-6 mt-2">
+          <li>Four zero-day vulnerabilities</li>
+          <li>ICS/SCADA manipulation</li>
+          <li>PLC logic alteration</li>
+          <li>Covert infiltration via USB and Windows systems</li>
+        </ul>
+      </p>
+
+      <p>It is widely attributed to a joint U.S.–Israeli operation codenamed <strong>Olympic Games</strong>.</p>
+
+    </div>
+  </section>
+
+  <!-- SECTION 2: IMPACT -->
+  <section id="impact">
+    <h3 class="text-3xl font-bold text-blue-700 mb-4">2. What Was the Impact?</h3>
+
+    <div class="bg-white p-8 rounded-xl shadow-lg text-gray-800 space-y-4">
+
+      <img src="https://upload.wikimedia.org/wikipedia/commons/8/80/IR-1_uranium_gas_centrifuge.png"
+           class="rounded-xl shadow mb-4"
+           alt="Iranian Uranium Centrifuge">
+
+      <p><strong>Damage to Critical Infrastructure:</strong><br>
+      Stuxnet destroyed roughly <strong>1,000 nuclear centrifuges</strong>, nearly one-third of Iran’s operational units.</p>
+
+      <p><strong>Operational Disruption:</strong><br>
+      Iran’s enrichment program was delayed for months as engineers replaced equipment and diagnosed false sensor readings intentionally injected by Stuxnet.</p>
+
+      <p><strong>Financial & Data Impact:</strong><br>
+      - No major data theft occurred.<br>
+      - The impact was physical, operational, and strategic rather than monetary.</p>
+
+      <p><strong>Recovery Time:</strong><br>
+      Full operational restoration required <strong>over 12 months</strong> due to equipment replacement and ICS reconfiguration.</p>
+
+    </div>
+  </section>
+
+  <!-- SECTION 3: WHY IT MATTERS -->
+  <section id="why-it-matters">
+    <h3 class="text-3xl font-bold text-blue-700 mb-4">3. Why It Matters?</h3>
+
+    <div class="bg-white p-8 rounded-xl shadow-lg text-gray-800 space-y-4">
+
+      <img src="https://upload.wikimedia.org/wikipedia/commons/e/e4/ICS_SCADA.png"
+           class="rounded-xl shadow mb-4"
+           alt="ICS SCADA Critical Infrastructure Diagram">
+
+      <p><strong>Stuxnet changed global cybersecurity strategy.</strong></p>
+
+      <p><strong>Key implications:</strong>
+        <ul class="list-disc ml-6 mt-2">
+          <li>Cyberattacks can cause real-world physical damage.</li>
+          <li>ICS and SCADA systems are highly vulnerable.</li>
+          <li>“Air-gapped” networks are not immune to threats.</li>
+          <li>Nation-state cyber weapons are now a standard geopolitical tool.</li>
+        </ul>
+      </p>
+
+      <p><strong>Lessons Learned:</strong>
+        <ul class="list-disc ml-6 mt-2">
+          <li>Critical infrastructure requires active monitoring, not passive isolation.</li>
+          <li>Zero-day exploits can have national-level impact.</li>
+          <li>Supply-chain and hardware-level attacks are a major risk surface.</li>
+          <li>ICS/OT security must be prioritized equal to IT cybersecurity.</li>
+        </ul>
+      </p>
+
+    </div>
+  </section>
+
+  <!-- MOTIVATIONAL QUOTE -->
+  <section id="quote">
+    <h3 class="text-3xl font-bold text-blue-700 mb-4">Motivational Quote</h3>
+    <div class="bg-white p-8 rounded-xl shadow-lg text-gray-800 text-xl italic leading-relaxed">
+      <p>
+        <strong>“الأمن ليس منتجًا تقوم بتثبيته، بل هو عقلية تمارسها.  
+        كل تنبيه تحلّله، وكل سجل تفحصه، وكل ثغرة تغلقها…  
+        هو خطوة جديدة نحو جعل العالم أكثر أمانًا مما كان عليه بالأمس.”</strong>
+      </p>
+    </div>
+  </section>
+
+  <!-- REFERENCES -->
+  <section id="references">
+    <h3 class="text-3xl font-bold text-blue-700 mb-4">References & Sources</h3>
+    <div class="bg-white p-8 rounded-xl shadow-lg text-gray-800">
+
+      <ul class="list-disc ml-6 space-y-2">
+        <li><a href="https://www.cisa.gov/news-events/cybersecurity-advisories/aa20-008a" 
+               class="text-blue-600 hover:underline">CISA – Stuxnet Analysis</a></li>
+
+        <li><a href="https://www.symantec.com/content/en/us/enterprise/media/security_response/whitepapers/w32_stuxnet_dossier.pdf"
+               class="text-blue-600 hover:underline">Symantec – Stuxnet Dossier (PDF)</a></li>
+
+        <li><a href="https://www.wired.com/2014/11/countdown-to-zero-day-stuxnet/"
+               class="text-blue-600 hover:underline">Wired – Countdown to Zero-Day Investigation</a></li>
+
+        <li><a href="https://www.kaspersky.com/resource-center/threats/stuxnet"
+               class="text-blue-600 hover:underline">Kaspersky – Stuxnet Overview</a></li>
+
+        <li><a href="https://en.wikipedia.org/wiki/Stuxnet"
+               class="text-blue-600 hover:underline">Wikipedia – Stuxnet</a></li>
+      </ul>
+
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-blue-900 text-white py-4 text-center text-sm mt-10">
+  © 2025 • DFIR Case Study • Stuxnet (2010)
+</footer>
+
+</body>
+</html>
