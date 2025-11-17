@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>NIST Detect Function Quiz</title>
+<script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 text-gray-800">
+
+<div class="max-w-3xl mx-auto mt-10 p-6 bg-white rounded-xl shadow-md">
+    <h1 class="text-3xl font-bold mb-4 text-blue-700">NIST SP 800-61 Rev 3 – Detect Function Quiz</h1>
+    <p class="mb-6 text-gray-600">Answer the 20 questions below. Results display instantly when submitted.</p>
+
+    <form id="quizForm" class="space-y-6">
+
+        <!-- Questions generated dynamically below -->
+    </form>
+
+    <button onclick="submitQuiz()"
+        class="mt-6 w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg text-lg font-semibold">
+        Submit Quiz
+    </button>
+
+    <div id="result" class="mt-6 p-4 hidden rounded-lg"></div>
+</div>
+
+<script>
+const quizData = [
+    {
+        q: "What is the main purpose of the Detect function in NIST SP 800-61 Rev 3?",
+        a: "B. To identify that a cybersecurity incident is occurring"
+    },
+    {
+        q: "Why is tuning monitoring technologies important in detection activities?",
+        a: "A. It reduces false positives and false negatives to acceptable levels"
+    },
+    {
+        q: "What is Continuous Monitoring (DE.CM) mainly used for?",
+        a: "B. Monitoring assets to find anomalies and IoCs"
+    },
+    {
+        q: "What is Adverse Event Analysis (DE.AE)?",
+        a: "B. Analyzing anomalies to detect incidents"
+    },
+    {
+        q: "Which tool type correlates large datasets for threat detection?",
+        a: "A. SIEM systems"
+    },
+    {
+        q: "Which system type automates responses to detected threats?",
+        a: "A. SOAR platforms"
+    },
+    {
+        q: "What is the key purpose of integrating Cyber Threat Intelligence (CTI) into detection?",
+        a: "A. To improve detection accuracy using current threat data"
+    },
+    {
+        q: "What question does detection aim to answer?",
+        a: "B. Is something malicious happening in our environment?"
+    },
+    {
+        q: "Which platform is an open-source SIEM stack?",
+        a: "A. ELK Stack (Elasticsearch, Logstash, Kibana)"
+    },
+    {
+        q: "Which example is an Endpoint Detection and Response (EDR) tool?",
+        a: "B. CrowdStrike Falcon"
+    },
+    {
+        q: "What does Wireshark primarily do?",
+        a: "B. Captures and inspects network traffic"
+    },
+    {
+        q: "What is a False Positive in security monitoring?",
+        a: "B. Legitimate activity flagged as malicious"
+    },
+    {
+        q: "What is a False Negative?",
+        a: "B. A real attack that goes undetected"
+    },
+    {
+        q: "Why must security teams balance detection sensitivity?",
+        a: "A. To reduce both false positives and false negatives"
+    },
+    {
+        q: "What is event correlation used for?",
+        a: "A. Linking related security events into meaningful patterns"
+    },
+    {
+        q: "What happens without effective correlation?",
+        a: "B. Analysts suffer from alert fatigue"
+    },
+    {
+        q: "Which method validates incidents by checking IoCs in databases like VirusTotal?",
+        a: "A. Threat Intelligence verification"
+    },
+    {
+        q: "In the response escalation chain, who should detect and report first?",
+        a: "C. Regular users"
+    },
+    {
+        q: "What is the key difference between IDS and IPS?",
+        a: "A. IDS alerts while IPS blocks threats"
+    },
+    {
+        q: "Why should organizations train staff to recognize the difference between normal errors and potential cyber threats?",
+        a: "B. To prevent false alarms and improve accurate incident reporting"
+    }
+];
+
+const quizForm = document.getElementById("quizForm");
+
+quizData.forEach((item, index) => {
+    const qBlock = `
+        <div>
+            <p class="font-semibold">${index + 1}. ${item.q}</p>
+            <input type="text" name="q${index}" placeholder="Type your answer letter (A/B/C/D)"
+                class="mt-2 p-2 border rounded w-full" />
+        </div>`;
+    quizForm.innerHTML += qBlock;
+});
+
+function submitQuiz() {
+    let score = 0;
+
+    quizData.forEach((item, index) => {
+        const userAnswer = document.querySelector(`input[name="q${index}"]`).value.trim().toUpperCase();
+        const correct = item.a.charAt(0);
+
+        if (userAnswer === correct) score++;
+    });
+
+    const resultBox = document.getElementById("result");
+    resultBox.classList.remove("hidden");
+
+    if (score >= 16) {
+        resultBox.className = "mt-6 p-4 rounded-lg bg-green-100 text-green-800";
+    } else if (score >= 10) {
+        resultBox.className = "mt-6 p-4 rounded-lg bg-yellow-100 text-yellow-800";
+    } else {
+        resultBox.className = "mt-6 p-4 rounded-lg bg-red-100 text-red-800";
+    }
+
+    resultBox.innerHTML = `
+        <h2 class="text-xl font-bold">Your Score: ${score} / ${quizData.length}</h2>
+        <p class="mt-2">Correct Answers:</p>
+        <ul class="list-disc ml-6 mt-1 text-sm">
+            ${quizData.map((i, idx) => `<li><strong>${idx + 1}</strong>: ${i.a}</li>`).join("")}
+        </ul>
+    `;
+}
+</script>
+
+</body>
+</html>
