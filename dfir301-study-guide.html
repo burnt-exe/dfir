@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>DFIR301 – Module 4 Study Guide (Slides 1–40)</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<style>
+  html { scroll-behavior: smooth; }
+</style>
+</head>
+
+<body class="bg-gray-100 text-gray-900 leading-relaxed">
+
+<!-- NAVBAR -->
+<nav class="bg-blue-900 text-white shadow-lg sticky top-0 z-50">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+    <h1 class="text-xl font-bold">DFIR301 – Module 4 Study Guide</h1>
+    <div class="space-x-6 text-sm font-semibold">
+      <a href="#detect" class="hover:text-blue-300">Detect</a>
+      <a href="#monitoring" class="hover:text-blue-300">Monitoring</a>
+      <a href="#tools" class="hover:text-blue-300">Tools</a>
+      <a href="#triage" class="hover:text-blue-300">Triage</a>
+      <a href="#evidence" class="hover:text-blue-300">Evidence</a>
+      <a href="#quiz" class="hover:text-blue-300">Quiz Prep</a>
+    </div>
+  </div>
+</nav>
+
+<!-- HEADER -->
+<header class="bg-white py-14 shadow">
+  <div class="max-w-7xl mx-auto px-6">
+    <h2 class="text-4xl font-extrabold text-blue-800">DFIR301 – Module 4: Detect & Respond</h2>
+    <p class="text-lg text-gray-700 mt-3 max-w-3xl">
+      A condensed, exam-ready cheat sheet summarizing slides 1–40 for fast revision and cybersecurity mastery. Use this guide to prepare for quizzes, classwork, and real-world DFIR operations.
+    </p>
+  </div>
+</header>
+
+<!-- MAIN CONTENT -->
+<main class="max-w-7xl mx-auto px-6 py-12 space-y-20">
+
+<!-- SECTION 1: DETECT FUNCTION -->
+<section id="detect">
+  <h3 class="text-3xl font-bold text-blue-700 mb-4">1. Detect (DE) Function Overview</h3>
+  <div class="bg-white p-8 rounded-xl shadow-lg space-y-4">
+
+    <p>The Detect function helps identify cybersecurity events quickly to minimize damage and reduce attacker dwell time.</p>
+
+    <ul class="list-disc ml-6 space-y-1">
+      <li>Identifies anomalies, threats, and IoCs.</li>
+      <li>Supports rapid response and containment.</li>
+      <li>Requires continuous monitoring & log analysis.</li>
+      <li>Improves threat visibility across networks & endpoints.</li>
+    </ul>
+
+    <p class="text-blue-700 font-semibold">Core components:</p>
+    <ul class="list-disc ml-6 space-y-1">
+      <li>Continuous monitoring</li>
+      <li>Event correlation</li>
+      <li>Threat intelligence</li>
+      <li>Adverse event analysis</li>
+    </ul>
+
+  </div>
+</section>
+
+<!-- SECTION 2: CONTINUOUS MONITORING -->
+<section id="monitoring">
+  <h3 class="text-3xl font-bold text-blue-700 mb-4">2. Continuous Monitoring (DE.CM)</h3>
+  <div class="bg-white p-8 rounded-xl shadow-lg space-y-4">
+
+    <p>Monitoring includes networks, users, cloud, physical environments, and all digital assets.</p>
+
+    <p class="font-semibold text-blue-700">Monitored elements:</p>
+    <ul class="list-disc ml-6 space-y-1">
+      <li>Email & web traffic</li>
+      <li>Login events & authentication anomalies</li>
+      <li>File integrity changes</li>
+      <li>Endpoint behaviour</li>
+      <li>Cloud audit logs</li>
+      <li>Malicious domain/IP communications</li>
+    </ul>
+
+    <p><strong>Tuning is essential:</strong> reduces false positives & false negatives to maintain operational efficiency.</p>
+
+  </div>
+</section>
+
+<!-- SECTION 3: TOOLS -->
+<section id="tools">
+  <h3 class="text-3xl font-bold text-blue-700 mb-4">3. Detection Tools</h3>
+  <div class="bg-white p-8 rounded-xl shadow-lg space-y-6">
+
+    <!-- SIEM -->
+    <div>
+      <h4 class="text-xl font-bold text-blue-600">SIEM</h4>
+      <p>Aggregates logs, correlates events, alerts analysts.</p>
+      <p class="font-semibold">Examples:</p>
+      <ul class="list-disc ml-6">
+        <li>Splunk</li>
+        <li>ELK Stack</li>
+        <li>Microsoft Sentinel</li>
+      </ul>
+    </div>
+
+    <!-- EDR -->
+    <div>
+      <h4 class="text-xl font-bold text-blue-600">EDR (Endpoint Detection & Response)</h4>
+      <p>Monitors endpoint telemetry, identifies malicious behaviour, and supports incident replay.</p>
+      <p class="font-semibold">Examples:</p>
+      <ul class="list-disc ml-6">
+        <li>CrowdStrike Falcon</li>
+        <li>Microsoft Defender ATP</li>
+        <li>SentinelOne</li>
+      </ul>
+    </div>
+
+    <!-- IDS/IPS -->
+    <div>
+      <h4 class="text-xl font-bold text-blue-600">IDS vs IPS</h4>
+      <table class="min-w-full bg-white border rounded-lg shadow mt-3">
+        <tr class="border-b">
+          <td class="p-4 font-semibold bg-gray-50">IDS</td>
+          <td class="p-4">Detects anomalies & alerts only</td>
+        </tr>
+        <tr>
+          <td class="p-4 font-semibold bg-gray-50">IPS</td>
+          <td class="p-4">Detects & blocks malicious activity</td>
+        </tr>
+      </table>
+    </div>
+
+    <!-- Threat Intel -->
+    <div>
+      <h4 class="text-xl font-bold text-blue-600">Threat Intelligence (CTI)</h4>
+      <p>Improves detection accuracy by providing real-world indicators of attacker tooling, infrastructure, and behaviour.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- SECTION 4: TRIAGE & ANALYSIS -->
+<section id="triage">
+  <h3 class="text-3xl font-bold text-blue-700 mb-4">4. Incident Triage & Analysis</h3>
+  <div class="bg-white p-8 rounded-xl shadow-lg space-y-4">
+
+    <p><strong>Triage</strong> classifies incidents based on severity, volatility of data, and relevance to the organization.</p>
+
+    <p class="font-semibold text-blue-700">Criteria:</p>
+    <ul class="list-disc ml-6 space-y-1">
+      <li>Severity of threat</li>
+      <li>Type of impacted asset</li>
+      <li>Type of data involved</li>
+      <li>Attack vector & scope</li>
+    </ul>
+
+    <p class="font-semibold text-blue-700">OODA Loop (Decision Cycle):</p>
+    <ul class="list-disc ml-6 space-y-1">
+      <li>Observe</li>
+      <li>Orient</li>
+      <li>Decide</li>
+      <li>Act</li>
+    </ul>
+
+  </div>
+</section>
+
+<!-- SECTION 5: EVIDENCE MANAGEMENT -->
+<section id="evidence">
+  <h3 class="text-3xl font-bold text-blue-700 mb-4">5. Evidence Handling & Chain of Custody</h3>
+  <div class="bg-white p-8 rounded-xl shadow-lg space-y-4">
+
+    <p>Proper handling ensures digital evidence is legally admissible and reliable.</p>
+
+    <p class="font-semibold text-blue-700">Physical Evidence Examples:</p>
+    <ul class="list-disc ml-6">
+      <li>Laptops, phones, PCs</li>
+      <li>Routers, switches, IoT devices</li>
+      <li>USB drives, SSD/HDD media</li>
+      <li>Smartwatches, cameras</li>
+    </ul>
+
+    <p class="font-semibold text-blue-700">Chain of Custody Requirements:</p>
+    <ul class="list-disc ml-6">
+      <li>Unique evidence ID</li>
+      <li>Date/time of collection</li>
+      <li>Collector & handler names</li>
+      <li>Storage locations</li>
+      <li>Reason for each transfer</li>
+    </ul>
+
+  </div>
+</section>
+
+<!-- SECTION 6: QUIZ PREPARATION -->
+<section id="quiz">
+  <h3 class="text-3xl font-bold text-blue-700 mb-4">6. Quiz Preparation Checklist</h3>
+  <div class="bg-white p-8 rounded-xl shadow-lg space-y-4">
+
+    <ul class="list-disc ml-6 space-y-1">
+      <li>Understand detection categories (DE.AE, DE.CM, DE.DP)</li>
+      <li>Know tools: SIEM, EDR, IDS, IPS, SOAR</li>
+      <li>Know differences: false-positive vs false-negative</li>
+      <li>Know the escalation chain</li>
+      <li>Know evidence-handling steps</li>
+      <li>Know ICS/CCI considerations</li>
+    </ul>
+
+    <p class="text-gray-700 mt-4">Mastering these concepts ensures readiness for both the quiz and real SOC/DFIR operations.</p>
+
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="bg-blue-900 text-white py-4 text-center text-sm mt-10">
+  © 2025 • DFIR301 – Module 4 Study Guide • Detect & Respond
+</footer>
+
+</body>
+</html>
