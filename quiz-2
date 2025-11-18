@@ -2,56 +2,57 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>SIEM / EDR / XDR Quiz</title>
+<title>SIEM / EDR / XDR Web Quiz</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 <style>
     body {
         font-family: Arial, sans-serif;
-        background: #eef2f7;
+        background: #f0f3f8;
         padding: 20px;
-        margin: 0;
     }
     h1 {
         text-align: center;
         color: #003973;
+        margin-bottom: 25px;
     }
-    .quiz-container {
-        max-width: 900px;
+    .quiz-box {
+        max-width: 880px;
         margin: auto;
-        background: white;
-        padding: 25px;
+        background: #ffffff;
+        padding: 30px;
         border-radius: 12px;
-        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
     }
     .question {
-        margin-bottom: 25px;
+        margin-bottom: 22px;
         font-size: 1.1rem;
     }
     select {
         width: 100%;
         padding: 12px;
         border-radius: 8px;
+        border: 1px solid #cccccc;
         font-size: 1rem;
     }
     button {
         background: #003973;
         color: white;
-        padding: 15px 25px;
+        padding: 14px;
         border: none;
+        width: 100%;
         border-radius: 10px;
         font-size: 1.2rem;
-        cursor: pointer;
-        width: 100%;
         margin-top: 20px;
+        cursor: pointer;
     }
     button:hover {
-        background: #0056a3;
+        background: #0059b3;
     }
-    #result {
+    #score {
         text-align: center;
         margin-top: 25px;
-        font-size: 1.3rem;
+        font-size: 1.4rem;
         color: #003973;
         font-weight: bold;
     }
@@ -59,236 +60,192 @@
 </head>
 <body>
 
-<h1>SIEM / EDR / XDR Interactive Quiz</h1>
+<h1>SIEM / EDR / XDR Web Quiz</h1>
 
-<div class="quiz-container">
+<div class="quiz-box">
+<form id="quiz">
 
-<form id="quizForm">
-
-<!-- QUESTIONS -->
-
-<div class="question">
-1. What does SIEM stand for?
+<div class="question">1. What does SIEM stand for?
 <select name="q1">
-  <option value="">-- Select an answer --</option>
+  <option value="">Select...</option>
   <option value="A">Security Information and Event Management</option>
   <option value="B">Secure Intelligence & Endpoint Monitoring</option>
   <option value="C">System Information Event Mapper</option>
   <option value="D">Security Incident Endpoint Module</option>
-</select>
-</div>
+</select></div>
 
-<div class="question">
-2. Which of the following is a core function of SIEM?
+<div class="question">2. What is a core function of a SIEM?
 <select name="q2">
-  <option value="">-- Select an answer --</option>
-  <option value="A">Antivirus scanning</option>
+  <option value="">Select...</option>
   <option value="B">Event correlation and log aggregation</option>
+  <option value="A">Antivirus scanning</option>
   <option value="C">Hardware monitoring</option>
   <option value="D">Email filtering</option>
-</select>
-</div>
+</select></div>
 
-<div class="question">
-3. True or False: SIEM detects threats using log analysis.
+<div class="question">3. True/False: SIEM detects threats using log analysis.
 <select name="q3">
-  <option value="">-- Select an answer --</option>
+  <option value="">Select...</option>
   <option value="T">True</option>
   <option value="F">False</option>
-</select>
-</div>
+</select></div>
 
-<div class="question">
-4. Which SIEM is part of Azure?
+<div class="question">4. Which SIEM is part of Azure?
 <select name="q4">
-  <option value="">-- Select an answer --</option>
+  <option value="">Select...</option>
   <option value="C">Microsoft Sentinel</option>
   <option value="A">IBM QRadar</option>
-  <option value="B">Splunk ES</option>
+  <option value="B">Splunk</option>
   <option value="D">ArcSight</option>
-</select>
-</div>
+</select></div>
 
-<div class="question">
-5. What is the main function of EDR?
+<div class="question">5. Primary purpose of EDR?
 <select name="q5">
-  <option value="">-- Select an answer --</option>
+  <option value="">Select...</option>
   <option value="A">Detect/respond to endpoint threats</option>
-  <option value="B">Manage cloud identity</option>
-  <option value="C">Encrypt traffic</option>
-  <option value="D">Monitor office productivity</option>
-</select>
-</div>
+  <option value="B">Manage identity</option>
+  <option value="C">Encrypt network traffic</option>
+  <option value="D">Monitor productivity</option>
+</select></div>
 
-<div class="question">
-6. Which of these is an EDR/XDR?
+<div class="question">6. Which is an EDR/XDR?
 <select name="q6">
-  <option value="">-- Select an answer --</option>
+  <option value="">Select...</option>
   <option value="B">CrowdStrike Falcon</option>
   <option value="A">Graylog</option>
   <option value="C">SolarWinds SEM</option>
   <option value="D">Securonix</option>
-</select>
-</div>
+</select></div>
 
-<div class="question">
-7. True or False: XDR is identical to EDR.
+<div class="question">7. True/False: XDR is identical to EDR.
 <select name="q7">
-  <option value="">-- Select an answer --</option>
+  <option value="">Select...</option>
   <option value="F">False</option>
   <option value="T">True</option>
-</select>
-</div>
+</select></div>
 
-<div class="question">
-8. What best describes XDR?
+<div class="question">8. Best description of XDR?
 <select name="q8">
-  <option value="">-- Select an answer --</option>
-  <option value="B">Extended detection across endpoints, identity, cloud, network</option>
-  <option value="A">Firewall configuration tool</option>
+  <option value="">Select...</option>
+  <option value="B">Extended detection across endpoint, identity, cloud, network</option>
+  <option value="A">Firewall tool</option>
   <option value="C">Backup solution</option>
-  <option value="D">Ticketing system</option>
-</select>
-</div>
+  <option value="D">Helpdesk system</option>
+</select></div>
 
-<div class="question">
-9. Which SIEM is known for indexing and analytics?
+<div class="question">9. SIEM known for indexing & analytics?
 <select name="q9">
-  <option value="">-- Select an answer --</option>
+  <option value="">Select...</option>
   <option value="B">Splunk Enterprise Security</option>
   <option value="D">FortiEDR</option>
-  <option value="C">Trend Micro Vision One</option>
+  <option value="C">Trend Micro</option>
   <option value="A">SentinelOne</option>
-</select>
-</div>
+</select></div>
 
-<div class="question">
-10. Log aggregation refers to:
+<div class="question">10. Log aggregation is:
 <select name="q10">
-  <option value="">-- Select an answer --</option>
+  <option value="">Select...</option>
   <option value="B">Collecting logs centrally</option>
   <option value="A">Compressing logs</option>
   <option value="C">Turning logs into images</option>
   <option value="D">Encrypting logs</option>
-</select>
-</div>
+</select></div>
 
-<div class="question">
-11. Scenario: Correlating firewall, DNS & endpoint logs requires:
+<div class="question">11. Correlating firewall, DNS & endpoint logs requires:
 <select name="q11">
-  <option value="">-- Select an answer --</option>
+  <option value="">Select...</option>
   <option value="B">SIEM</option>
   <option value="A">EDR</option>
-  <option value="C">Ticketing</option>
+  <option value="C">Ticketing system</option>
   <option value="D">Antivirus</option>
-</select>
-</div>
+</select></div>
 
-<div class="question">
-12. Which EDR uses AI autonomous capability?
+<div class="question">12. Which EDR uses AI-autonomous capability?
 <select name="q12">
-  <option value="">-- Select an answer --</option>
+  <option value="">Select...</option>
   <option value="B">SentinelOne</option>
   <option value="A">Rapid7</option>
   <option value="C">NetIQ</option>
   <option value="D">ManageEngine</option>
-</select>
-</div>
+</select></div>
 
-<div class="question">
-13. True or False: SIEMs cannot integrate with EDR.
+<div class="question">13. True/False: SIEMs cannot integrate with EDR.
 <select name="q13">
-  <option value="">-- Select an answer --</option>
+  <option value="">Select...</option>
   <option value="F">False</option>
   <option value="T">True</option>
-</select>
-</div>
+</select></div>
 
-<div class="question">
-14. IBM’s SIEM is:
+<div class="question">14. IBM’s SIEM:
 <select name="q14">
-  <option value="">-- Select an answer --</option>
+  <option value="">Select...</option>
   <option value="C">IBM QRadar</option>
   <option value="A">IBM Bluemix</option>
-  <option value="D">Cloud Pak</option>
   <option value="B">Verify</option>
-</select>
-</div>
+  <option value="D">Cloud Pak</option>
+</select></div>
 
-<div class="question">
-15. Which is NOT an EDR?
+<div class="question">15. NOT an EDR:
 <select name="q15">
-  <option value="">-- Select an answer --</option>
+  <option value="">Select...</option>
   <option value="D">SolarWinds SEM</option>
   <option value="A">Palo Alto Cortex</option>
   <option value="B">Malwarebytes</option>
   <option value="C">Huntress</option>
-</select>
-</div>
+</select></div>
 
-<div class="question">
-16. XDR advantage:
+<div class="question">16. Advantage of XDR:
 <select name="q16">
-  <option value="">-- Select an answer --</option>
+  <option value="">Select...</option>
   <option value="B">Correlates across multiple layers</option>
   <option value="A">Cheaper</option>
   <option value="C">Replaces firewalls</option>
   <option value="D">Offline-only</option>
-</select>
-</div>
+</select></div>
 
-<div class="question">
-17. Google Cloud SIEM option:
+<div class="question">17. Google Cloud SIEM:
 <select name="q17">
-  <option value="">-- Select an answer --</option>
+  <option value="">Select...</option>
   <option value="A">Chronicle Security</option>
   <option value="B">ArcSight</option>
   <option value="C">Carbon Black</option>
   <option value="D">Acronis</option>
-</select>
-</div>
+</select></div>
 
-<div class="question">
-18. Benefits of EDR (choose best):
+<div class="question">18. Benefit of EDR:
 <select name="q18">
-  <option value="">-- Select an answer --</option>
+  <option value="">Select...</option>
   <option value="A">Threat detection & endpoint response</option>
   <option value="B">Better USB management</option>
   <option value="C">Faster printing</option>
-  <option value="D">Improved WiFi speeds</option>
-</select>
-</div>
+  <option value="D">Improved WiFi</option>
+</select></div>
 
-<div class="question">
-19. Detect lateral movement across identity/network requires:
+<div class="question">19. Detect lateral movement requires:
 <select name="q19">
-  <option value="">-- Select an answer --</option>
+  <option value="">Select...</option>
   <option value="B">XDR</option>
   <option value="A">EDR</option>
   <option value="C">Antivirus</option>
   <option value="D">DNS</option>
-</select>
-</div>
+</select></div>
 
-<div class="question">
-20. True or False: EDR can isolate infected machines.
+<div class="question">20. True/False: EDR can isolate infected machines.
 <select name="q20">
-  <option value="">-- Select an answer --</option>
+  <option value="">Select...</option>
   <option value="T">True</option>
   <option value="F">False</option>
-</select>
-</div>
+</select></div>
 
 </form>
 
-<button onclick="gradeQuiz()">Submit Quiz</button>
-
-<div id="result"></div>
+<button onclick="grade()">Submit Quiz</button>
+<div id="score"></div>
 
 </div>
 
 <script>
-function gradeQuiz() {
+function grade() {
     const answers = {
         q1:"A", q2:"B", q3:"T", q4:"C", q5:"A",
         q6:"B", q7:"F", q8:"B", q9:"B", q10:"B",
@@ -298,12 +255,12 @@ function gradeQuiz() {
 
     let score = 0;
     for (let q in answers) {
-        const userAns = document.querySelector(`[name="${q}"]`).value;
-        if (userAns === answers[q]) score++;
+        let user = document.querySelector(`[name="${q}"]`).value;
+        if (user === answers[q]) score++;
     }
 
-    document.getElementById("result").innerHTML =
-        `You scored <strong>${score}/20</strong>`;
+    document.getElementById("score").innerHTML =
+        `You scored <strong>${score} / 20</strong>`;
 }
 </script>
 
