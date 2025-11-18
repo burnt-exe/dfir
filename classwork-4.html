@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Interactive SIEM & EDR/XDR Research Hub</title>
+
+<style>
+    body {
+        margin: 0;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background: #eef2f7;
+    }
+
+    header {
+        background: linear-gradient(135deg, #003973, #000428);
+        padding: 45px 20px;
+        text-align: center;
+        color: white;
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: 2.6rem;
+        font-weight: 600;
+    }
+
+    .arabic-quote {
+        font-size: 1.4rem;
+        margin-top: 15px;
+        font-weight: 400;
+        direction: rtl;
+        font-family: "Amiri", serif;
+    }
+
+    .container {
+        width: 92%;
+        max-width: 1200px;
+        margin: 40px auto;
+    }
+
+    .brief-box {
+        background: white;
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        margin-bottom: 40px;
+    }
+
+    h2.section-title {
+        color: #000428;
+        margin-bottom: 10px;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 18px;
+        margin-top: 20px;
+    }
+
+    .tile {
+        background: white;
+        padding: 20px;
+        border-radius: 12px;
+        text-align: center;
+        transition: transform 0.25s ease, box-shadow 0.25s ease;
+        box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+        font-size: 1.05rem;
+    }
+
+    .tile:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+        cursor: pointer;
+    }
+
+    .tile a {
+        text-decoration: none;
+        color: #003973;
+        font-weight: 600;
+    }
+
+    footer {
+        margin-top: 50px;
+        padding: 20px;
+        text-align: center;
+        background: #dde3ea;
+        color: #444;
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>SIEM & EDR/XDR Interactive Research Hub</h1>
+    <div class="arabic-quote">"ما دمتَ تسعى… ستصل ولو طال الطريق."</div>
+</header>
+
+<div class="container">
+
+    <div class="brief-box">
+        <h2 class="section-title">Student Brief</h2>
+        <p>
+            Your task is to research <strong>1–2 SIEM platforms</strong> and <strong>1–2 EDR/XDR systems</strong>.  
+            Create a presentation that explains the features, capabilities, and use cases of the technologies you select.
+        </p>
+        <p>Submit your completed presentation to: <strong>marcin.p@c2-academy.com</strong></p>
+    </div>
+
+    <!-- SIEM SECTION -->
+    <h2 class="section-title">20 SIEM Platforms</h2>
+    <div class="grid">
+
+        <div class="tile"><a href="https://www.splunk.com/en_us/software/enterprise-security.html" target="_blank">Splunk Enterprise Security</a></div>
+        <div class="tile"><a href="https://www.ibm.com/qradar" target="_blank">IBM QRadar</a></div>
+        <div class="tile"><a href="https://azure.microsoft.com/en-us/products/microsoft-sentinel/" target="_blank">Microsoft Sentinel</a></div>
+        <div class="tile"><a href="https://www.elastic.co/siem" target="_blank">Elastic SIEM</a></div>
+        <div class="tile"><a href="https://www.securonix.com/platform/next-gen-siem/" target="_blank">Securonix SIEM</a></div>
+        <div class="tile"><a href="https://www.exabeam.com/" target="_blank">Exabeam</a></div>
+        <div class="tile"><a href="https://logrhythm.com/solutions/siem/" target="_blank">LogRhythm SIEM</a></div>
+        <div class="tile"><a href="https://cybersecurity.att.com/products/usm-anywhere" target="_blank">AlienVault USM</a></div>
+        <div class="tile"><a href="https://www.microfocus.com/en-us/cyberres/secops/arcsight" target="_blank">ArcSight</a></div>
+        <div class="tile"><a href="https://www.netwitness.com/products/siem/" target="_blank">RSA NetWitness</a></div>
+        <div class="tile"><a href="https://www.fortinet.com/products/siem" target="_blank">FortiSIEM</a></div>
+        <div class="tile"><a href="https://www.solarwinds.com/security-event-manager" target="_blank">SolarWinds SEM</a></div>
+        <div class="tile"><a href="https://graylog.org/products/graylog-security/" target="_blank">Graylog Security</a></div>
+        <div class="tile"><a href="https://www.sumologic.com/solutions/security/" target="_blank">Sumo Logic SIEM</a></div>
+        <div class="tile"><a href="https://www.rapid7.com/products/insightidr/" target="_blank">Rapid7 InsightIDR</a></div>
+        <div class="tile"><a href="https://www.manageengine.com/log-management/" target="_blank">ManageEngine Log360</a></div>
+        <div class="tile"><a href="https://www.mcafee.com/enterprise/en-us/products/enterprise-security-manager.html" target="_blank">McAfee ESM</a></div>
+        <div class="tile"><a href="https://chronicle.security/" target="_blank">Google Chronicle</a></div>
+        <div class="tile"><a href="https://www.opentext.com/products/netiq-sentinel" target="_blank">NetIQ Sentinel</a></div>
+        <div class="tile"><a href="https://www.snowflake.com/en/data-lake/security-lake/" target="_blank">Snowflake Security Lake</a></div>
+
+    </div>
+
+    <!-- EDR/XDR SECTION -->
+    <h2 class="section-title">20 EDR / XDR Platforms</h2>
+    <div class="grid">
+
+        <div class="tile"><a href="https://www.crowdstrike.com/" target="_blank">CrowdStrike Falcon</a></div>
+        <div class="tile"><a href="https://learn.microsoft.com/en-us/microsoft-365/security/defender-endpoint/" target="_blank">Microsoft Defender</a></div>
+        <div class="tile"><a href="https://www.sentinelone.com/platform/singularity-xdr/" target="_blank">SentinelOne</a></div>
+        <div class="tile"><a href="https://www.paloaltonetworks.com/cortex/xdr" target="_blank">Palo Alto Cortex XDR</a></div>
+        <div class="tile"><a href="https://www.trendmicro.com/en_us/business/products/xdr.html" target="_blank">Trend Micro Vision One</a></div>
+        <div class="tile"><a href="https://www.sophos.com/en-us/products/intercept-x" target="_blank">Sophos Intercept X</a></div>
+        <div class="tile"><a href="https://www.bitdefender.com/business/endpoint-security/" target="_blank">Bitdefender GravityZone</a></div>
+        <div class="tile"><a href="https://www.fortinet.com/products/endpoint-security/fortiedr" target="_blank">FortiEDR</a></div>
+        <div class="tile"><a href="https://www.cybereason.com/platform" target="_blank">Cybereason Defense</a></div>
+        <div class="tile"><a href="https://www.vmware.com/products/carbon-black-cloud.html" target="_blank">VMware Carbon Black</a></div>
+        <div class="tile"><a href="https://www.mcafee.com/enterprise/en-us/products/mvision-endpoint-security.html" target="_blank">McAfee MVISION</a></div>
+        <div class="tile"><a href="https://www.kaspersky.com/enterprise-security" target="_blank">Kaspersky Endpoint</a></div>
+        <div class="tile"><a href="https://www.eset.com/int/business/endpoint-protection/" target="_blank">ESET Protect</a></div>
+        <div class="tile"><a href="https://www.checkpoint.com/harmony/endpoint/" target="_blank">Check Point Harmony</a></div>
+        <div class="tile"><a href="https://www.malwarebytes.com/business/edr" target="_blank">Malwarebytes EDR</a></div>
+        <div class="tile"><a href="https://heimdalsecurity.com/en/products/threat-hunting-edr" target="_blank">Heimdal EDR</a></div>
+        <div class="tile"><a href="https://www.huntress.com/" target="_blank">Huntress MDR/EDR</a></div>
+        <div class="tile"><a href="https://www.cisco.com/c/en/us/products/security/secure-endpoint/" target="_blank">Cisco Secure Endpoint</a></div>
+        <div class="tile"><a href="https://www.acronis.com/en-us/products/cyber-protect/" target="_blank">Acronis Cyber Protect</a></div>
+        <div class="tile"><a href="https://www.trellix.com/en-us/products/xdr.html" target="_blank">Trellix XDR</a></div>
+
+    </div>
+
+</div>
+
+<footer>
+    © 2025 Cybersecurity Study Hub • Interactive Version
+</footer>
+
+</body>
+</html>
