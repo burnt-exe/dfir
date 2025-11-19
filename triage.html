@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DFIR Triage Portal</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Styling -->
+<style>
+    body {
+        margin:0;
+        font-family: Arial, sans-serif;
+        background:#f0f3f8;
+    }
+    header {
+        background: linear-gradient(135deg,#00254d,#001220);
+        padding:40px;
+        text-align:center;
+        color:white;
+    }
+    h1 {
+        margin:0;
+        font-size:2.5rem;
+    }
+    .container {
+        max-width:1000px;
+        margin:auto;
+        padding:25px;
+    }
+    .card {
+        background:white;
+        padding:25px;
+        border-radius:12px;
+        box-shadow:0 5px 20px rgba(0,0,0,0.1);
+        margin-bottom:30px;
+    }
+    .accordion {
+        background:#003973;
+        color:white;
+        padding:14px;
+        border-radius:8px;
+        cursor:pointer;
+        margin-top:10px;
+    }
+    .panel {
+        display:none;
+        padding:15px;
+        border-left:3px solid #003973;
+        background:white;
+        margin-bottom:10px;
+    }
+    .check-item {
+        margin:8px 0;
+    }
+    .quiz-select {
+        width:100%;
+        padding:12px;
+        border-radius:8px;
+        font-size:1rem;
+    }
+    button {
+        background:#003973;
+        color:white;
+        padding:14px;
+        border:none;
+        border-radius:8px;
+        cursor:pointer;
+        width:100%;
+        margin-top:15px;
+        font-size:1.1rem;
+    }
+    button:hover {
+        background:#0059b3;
+    }
+    #result {
+        margin-top:15px;
+        font-size:1.3rem;
+        font-weight:bold;
+        color:#003973;
+        text-align:center;
+    }
+    footer {
+        text-align:center;
+        padding:20px;
+        color:#666;
+        margin-top:20px;
+    }
+</style>
+</head>
+
+<body>
+
+<header>
+    <h1>DFIR TRIAGE MODULE</h1>
+    <p>NIST SP 800-61 | 800-137 Aligned</p>
+</header>
+
+<div class="container">
+
+<!-- SECTION 1 -->
+<div class="card">
+    <h2>Triage Overview</h2>
+    <p>Triage is the rapid assessment phase of incident response designed to classify severity, understand scope, and prioritize immediate actions.</p>
+
+    <h3>Key NIST References</h3>
+    <ul>
+        <li><a href="https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final" target="_blank">NIST SP 800-61 (Incident Handling Guide)</a></li>
+        <li><a href="https://csrc.nist.gov/publications/detail/sp/800-137/final" target="_blank">NIST SP 800-137 (Continuous Monitoring)</a></li>
+        <li><a href="https://www.cisa.gov/resources-tools" target="_blank">CISA Security Resources</a></li>
+    </ul>
+</div>
+
+<!-- SECTION 2 -->
+<div class="card">
+    <h2>Interactive Triage Checklist</h2>
+
+    <label class="check-item"><input type="checkbox"> Validate alert source</label><br>
+    <label class="check-item"><input type="checkbox"> Identify affected asset(s)</label><br>
+    <label class="check-item"><input type="checkbox"> Determine criticality</label><br>
+    <label class="check-item"><input type="checkbox"> Check for lateral movement</label><br>
+    <label class="check-item"><input type="checkbox"> Look for privilege escalation</label><br>
+    <label class="check-item"><input type="checkbox"> EDR/SIEM correlation review</label><br>
+    <label class="check-item"><input type="checkbox"> Containment required?</label><br>
+    <label class="check-item"><input type="checkbox"> Escalation needed?</label><br>
+</div>
+
+<!-- SECTION 3 -->
+<div class="card">
+    <h2>DFIR Triage Process (Expandable)</h2>
+
+    <div class="accordion">1. Validate Alert</div>
+    <div class="panel">Confirm alert source, verify indicators, dismiss false positives.</div>
+
+    <div class="accordion">2. Identify Affected Assets</div>
+    <div class="panel">Determine which system, user, network, or application is impacted.</div>
+
+    <div class="accordion">3. Assign Severity</div>
+    <div class="panel">
+        Critical: Active threat, domain compromise, ransomware<br>
+        Major: Contained threat, medium impact<br>
+        Minor: Low risk or anomaly
+    </div>
+
+    <div class="accordion">4. Contain</div>
+    <div class="panel">Isolate host, disable account, block IP/domain, revoke tokens.</div>
+
+    <div class="accordion">5. Document</div>
+    <div class="panel">Record everything: timestamps, actions taken, artifacts collected.</div>
+</div>
+
+<!-- SECTION 4 -->
+<div class="card">
+    <h2>Interactive Quiz</h2>
+    <form id="quiz">
+
+        <p>1. What is the purpose of triage?</p>
+        <select class="quiz-select" name="q1">
+            <option value="">Select...</option>
+            <option value="A">Quick assessment and prioritization</option>
+            <option value="B">Full forensic analysis</option>
+            <option value="C">System recovery</option>
+        </select>
+
+        <p>2. Which NIST document defines incident handling?</p>
+        <select class="quiz-select" name="q2">
+            <option value="">Select...</option>
+            <option value="A">NIST SP 800-61</option>
+            <option value="B">NIST SP 500-291</option>
+            <option value="C">NIST SP 1800-25</option>
+        </select>
+
+        <p>3. A “Critical” triage classification means:</p>
+        <select class="quiz-select" name="q3">
+            <option value="">Select...</option>
+            <option value="A">Active threat / high risk</option>
+            <option value="B">Information-only alert</option>
+            <option value="C">User training issue</option>
+        </select>
+
+        <button type="button" onclick="gradeQuiz()">Submit</button>
+        <div id="result"></div>
+
+    </form>
+</div>
+
+<!-- SECTION 5 -->
+<div class="card">
+    <h2>Downloadable DFIR Triage Resources</h2>
+
+    <ul>
+        <li><a href="Triage_Form.pdf" download>📄 Triage Form (Fillable)</a></li>
+        <li><a href="Triage_Decision_Matrix.pdf" download>📊 Severity Matrix</a></li>
+        <li><a href="NIST_IR_Triage_Section.pdf" download>📘 NIST IR Plan – Triage Section</a></li>
+        <li><a href="Triage_Playbook.pdf" download>⚠️ DFIR Triage Playbook</a></li>
+    </ul>
+</div>
+
+</div>
+
+<footer>
+    © 2025 DFIR Triage Training Module • Skunkworks Africa
+</footer>
+
+<script>
+// Accordion
+let acc=document.getElementsByClassName("accordion");
+for(let i=0;i<acc.length;i++){
+    acc[i].onclick=function(){
+        this.classList.toggle("active");
+        let panel=this.nextElementSibling;
+        panel.style.display = panel.style.display==="block"?"none":"block";
+    }
+}
+
+// Quiz grading
+function gradeQuiz(){
+    let score=0;
+    const answers={q1:"A",q2:"A",q3:"A"};
+
+    for(let q in answers){
+        let val=document.querySelector(`[name="${q}"]`).value;
+        if(val===answers[q]) score++;
+    }
+
+    document.getElementById("result").innerHTML=`Score: ${score} / 3`;
+}
+</script>
+</body>
+</html>
