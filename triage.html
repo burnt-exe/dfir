@@ -2,89 +2,191 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>DFIR Triage Portal</title>
+<title>DFIR Triage Module – NIST & MITRE ATT&CK Aligned</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<!-- Styling -->
+<!-- ====== GLOBAL DARK NAVY SOC STYLE ====== -->
 <style>
     body {
-        margin:0;
-        font-family: Arial, sans-serif;
-        background:#f0f3f8;
+        margin: 0;
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: #0a1224;
+        color: #d8e2ff;
     }
+
+    a { color: #66aaff; }
+
     header {
-        background: linear-gradient(135deg,#00254d,#001220);
-        padding:40px;
-        text-align:center;
-        color:white;
+        background: linear-gradient(135deg, #001637, #000a1c);
+        padding: 50px 20px;
+        text-align: center;
+        color: white;
+        border-bottom: 2px solid #0e274a;
     }
-    h1 {
-        margin:0;
-        font-size:2.5rem;
+
+    header h1 {
+        font-size: 2.8rem;
+        margin-bottom: 10px;
+        color: #88b6ff;
+        text-shadow: 0 0 8px rgba(90,160,255,0.5);
     }
+
+    header p {
+        font-size: 1.2rem;
+        color: #b5ccff;
+    }
+
     .container {
-        max-width:1000px;
-        margin:auto;
-        padding:25px;
+        max-width: 1100px;
+        margin: auto;
+        padding: 25px;
     }
+
     .card {
-        background:white;
-        padding:25px;
-        border-radius:12px;
-        box-shadow:0 5px 20px rgba(0,0,0,0.1);
-        margin-bottom:30px;
+        background: #0f1a33;
+        padding: 25px;
+        margin-bottom: 30px;
+        border-radius: 14px;
+        border: 1px solid #16274d;
+        box-shadow: 0 0 15px rgba(0,0,0,0.4);
     }
+
+    h2 {
+        margin-top: 0;
+        color: #82b5ff;
+        font-size: 1.8rem;
+        text-shadow: 0 0 5px rgba(95,140,255,0.4);
+    }
+
+    h3 {
+        color: #c1d6ff;
+        margin-top: 18px;
+    }
+
+    /* Accordion (Process, Evidence, etc.) */
     .accordion {
-        background:#003973;
-        color:white;
-        padding:14px;
-        border-radius:8px;
-        cursor:pointer;
-        margin-top:10px;
+        background: #102447;
+        color: #cfe0ff;
+        padding: 14px;
+        cursor: pointer;
+        border-radius: 8px;
+        margin-top: 12px;
+        border: 1px solid #1c3a72;
+        transition: 0.3s;
     }
+
+    .accordion:hover {
+        background: #173567;
+    }
+
     .panel {
-        display:none;
-        padding:15px;
-        border-left:3px solid #003973;
-        background:white;
-        margin-bottom:10px;
+        display: none;
+        padding: 15px;
+        background: #0d1c39;
+        border-left: 4px solid #3d7bff;
+        margin-top: 5px;
+        border-radius: 6px;
     }
-    .check-item {
-        margin:8px 0;
+
+    /* Checklist styling */
+    .checklist label {
+        display: block;
+        margin: 10px 0;
+        font-size: 1.05rem;
+        cursor: pointer;
     }
-    .quiz-select {
-        width:100%;
-        padding:12px;
-        border-radius:8px;
-        font-size:1rem;
+    .checklist input[type="checkbox"] {
+        transform: scale(1.3);
+        margin-right: 10px;
     }
+
+    /* Quiz dropdown */
+    select {
+        width: 100%;
+        padding: 12px;
+        margin-top: 6px;
+        border-radius: 8px;
+        border: 1px solid #284e8a;
+        background: #0e1d3a;
+        color: #d8e2ff;
+        font-size: 1rem;
+    }
+
+    /* Buttons */
     button {
-        background:#003973;
-        color:white;
-        padding:14px;
-        border:none;
-        border-radius:8px;
-        cursor:pointer;
-        width:100%;
-        margin-top:15px;
-        font-size:1.1rem;
+        padding: 15px;
+        background: #1d59cf;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        width: 100%;
+        font-size: 1.15rem;
+        cursor: pointer;
+        margin-top: 20px;
+        transition: 0.2s;
     }
+
     button:hover {
-        background:#0059b3;
+        background: #3a7aff;
+        box-shadow: 0 0 12px rgba(58,122,255,0.6);
     }
-    #result {
-        margin-top:15px;
-        font-size:1.3rem;
-        font-weight:bold;
-        color:#003973;
-        text-align:center;
+
+    #score {
+        margin-top: 20px;
+        text-align: center;
+        font-size: 1.3rem;
+        color: #78a7ff;
     }
+
+    /* Drag-and-Drop Matrix */
+    .dnd-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 15px;
+        flex-wrap: wrap;
+        margin-top: 20px;
+    }
+
+    .dnd-bin {
+        flex: 1;
+        min-width: 280px;
+        background: #0e1a34;
+        border: 2px dashed #355a99;
+        border-radius: 10px;
+        padding: 15px;
+        height: 300px;
+        overflow-y: auto;
+    }
+
+    .dnd-bin h4 {
+        text-align: center;
+        color: #88b6ff;
+        margin-bottom: 10px;
+        text-shadow: 0 0 4px rgba(110,170,255,0.5);
+    }
+
+    .draggable {
+        padding: 10px;
+        margin: 10px 0;
+        background: #13244a;
+        border: 1px solid #4067b1;
+        border-radius: 6px;
+        cursor: grab;
+        color: #cdd9ff;
+    }
+
+    .draggable:hover {
+        background: #1a3673;
+    }
+
+    /* Footer */
     footer {
-        text-align:center;
-        padding:20px;
-        color:#666;
-        margin-top:20px;
+        text-align: center;
+        padding: 20px;
+        color: #8ea8d8;
+        margin-top: 40px;
     }
+
 </style>
 </head>
 
@@ -92,138 +194,924 @@
 
 <header>
     <h1>DFIR TRIAGE MODULE</h1>
-    <p>NIST SP 800-61 | 800-137 Aligned</p>
+    <p>NIST SP 800-61 • SP 800-137 • MITRE ATT&CK • SOC Analyst Suite</p>
 </header>
 
 <div class="container">
 
-<!-- SECTION 1 -->
+<!-- ====== PART 1 COMPLETE ====== -->
+<!-- ========================= -->
+<!--   PART 2 — TRIAGE THEORY  -->
+<!-- ========================= -->
+
 <div class="card">
-    <h2>Triage Overview</h2>
-    <p>Triage is the rapid assessment phase of incident response designed to classify severity, understand scope, and prioritize immediate actions.</p>
+    <h2>What is DFIR Triage?</h2>
 
-    <h3>Key NIST References</h3>
+    <p>
+        Triage is the **rapid assessment phase** of Digital Forensics & Incident Response (DFIR). 
+        Its purpose is to determine:
+    </p>
+
     <ul>
-        <li><a href="https://csrc.nist.gov/publications/detail/sp/800-61/rev-2/final" target="_blank">NIST SP 800-61 (Incident Handling Guide)</a></li>
-        <li><a href="https://csrc.nist.gov/publications/detail/sp/800-137/final" target="_blank">NIST SP 800-137 (Continuous Monitoring)</a></li>
-        <li><a href="https://www.cisa.gov/resources-tools" target="_blank">CISA Security Resources</a></li>
+        <li><b>What is happening?</b></li>
+        <li><b>How severe is it?</b></li>
+        <li><b>What should be acted on FIRST?</b></li>
     </ul>
-</div>
 
-<!-- SECTION 2 -->
+    <p>
+        During security incidents, time is the enemy. The first 5–15 minutes define 
+        whether an attacker is stopped early or allowed to escalate.
+    </p>
+
+    <p>Triage bridges the gap between detection and full investigation.</p>
+
+    <h3>NIST Mapping</h3>
+    <p>NIST SP 800-61 defines triage within the <b>Detect</b> and <b>Respond</b> phases:</p>
+
+    <ul>
+        <li><b>DE.AE-1</b> — Detection events analyzed</li>
+        <li><b>DE.AE-3</b> — Event severity determination</li>
+        <li><b>RS.AN-1</b> — Forensic analysis begins</li>
+        <li><b>RS.CO-2</b> — Containment actions initiated</li>
+    </ul>
+
+    <h3>NIST SP 800-137: Continuous Monitoring Alignment</h3>
+    <p>
+        Continuous Monitoring feeds triage with:
+    </p>
+
+    <ul>
+        <li>Log telemetry</li>
+        <li>Endpoint events</li>
+        <li>Network detections</li>
+        <li>Threat intel indicators</li>
+        <li>Baseline deviations</li>
+    </ul>
+
+    <hr style="margin:25px 0; border-color:#203a63;">
+
+    <h2>MITRE ATT&CK Mapping for Triage</h2>
+    <p>Triage aligns with MITRE ATT&CK during early detection of attacker behaviors:</p>
+
+    <ul>
+        <li><b>Initial Access</b> – Phishing, exploitation</li>
+        <li><b>Execution</b> – Scripts, payloads, PowerShell</li>
+        <li><b>Persistence</b> – Registry keys, scheduled tasks</li>
+        <li><b>Privilege Escalation</b> – Token manipulation, UAC bypass</li>
+        <li><b>Lateral Movement</b> – SMB, RDP, PSRemoting</li>
+        <li><b>Command & Control</b> – DNS tunneling, HTTPS beacons</li>
+        <li><b>Exfiltration</b> – Data staging, cloud sync abuse</li>
+    </ul>
+
+    <p>
+        Effective triage requires pattern recognition — mapping alerts and evidence 
+        to ATT&CK tactics quickly.
+    </p>
+
+    <hr style="margin:25px 0; border-color:#203a63;">
+
+    <h2>Types of Triage</h2>
+
+    <h3>1. Host-Based Triage</h3>
+    <p>Performed on a workstation, server, VM, or cloud instance.</p>
+    <ul>
+        <li>Running processes</li>
+        <li>Network connections</li>
+        <li>Autoruns / persistence</li>
+        <li>Security logs</li>
+        <li>Malicious binaries</li>
+        <li>Execution history (PSReadline, ShimCache, Amcache)</li>
+    </ul>
+
+    <h3>2. Network Triage</h3>
+    <p>Focuses on malicious traffic indicators such as:</p>
+    <ul>
+        <li>Beaconing patterns</li>
+        <li>Abnormal DNS queries</li>
+        <li>Port scanning</li>
+        <li>Lateral movement</li>
+        <li>VPN anomalies</li>
+        <li>Cloud exfiltration routes</li>
+    </ul>
+
+    <h3>3. Cloud Triage</h3>
+    <p>Identity-first environments require cloud-focused triage:</p>
+    <ul>
+        <li>IAM role misuse</li>
+        <li>OAuth token abuse</li>
+        <li>Impossible travel</li>
+        <li>Privilege escalation via policy changes</li>
+        <li>API key leakage</li>
+        <li>S3/GCS/Blob over-access</li>
+    </ul>
+
+    <h3>4. Memory (RAM) Triage</h3>
+    <p>Critical when analyzing real-time malware behavior:</p>
+    <ul>
+        <li>Injected processes</li>
+        <li>In-memory payloads</li>
+        <li>Encrypted network sessions</li>
+        <li>Volatile attacker artifacts</li>
+    </ul>
+
+    <hr style="margin:25px 0; border-color:#203a63;">
+
+    <h2>Evidence Prioritization During Triage</h2>
+
+    <p>You cannot analyze everything at once. High-value evidence includes:</p>
+
+    <ul>
+        <li><b>Indicators of Compromise (IOCs)</b> — hashes, domains, IPs</li>
+        <li><b>Process execution events</b> — suspicious binaries</li>
+        <li><b>Authentication logs</b> — failed logons, MFA bypass</li>
+        <li><b>Network connections</b> — C2 servers, anomalous ports</li>
+        <li><b>Cloud audit logs</b> — IAM changes, privilege spikes</li>
+        <li><b>EDR alerts</b> — correlation findings</li>
+    </ul>
+
+    <p>
+        The aim is not to collect everything — it is to <b>collect what matters NOW</b>.
+    </p>
+
+</div>
+<!-- ======================================== -->
+<!--   PART 3 — EVIDENCE HANDLING & ACQUISITION -->
+<!-- ======================================== -->
+
+<div class="card">
+    <h2>Evidence Handling & Acquisition (DFIR/NIST-Compliant)</h2>
+
+    <p>
+        Effective triage requires disciplined evidence handling. Evidence must be acquired 
+        quickly, safely, and in a way that preserves integrity for deeper investigation.
+    </p>
+
+    <p>
+        This section outlines best practices from NIST SP 800-61, SWGDE, and forensic standards.
+    </p>
+
+    <h3>Principles of Evidence Handling</h3>
+
+    <ul>
+        <li><b>Preserve before you analyze</b> — snapshot or acquire first, investigate second.</li>
+        <li><b>Volatile evidence first</b> — RAM, running processes, network connections.</li>
+        <li><b>Follow chain-of-custody</b> — who touched what, when, and why.</li>
+        <li><b>Minimize footprint</b> — every command changes the system.</li>
+        <li><b>Document everything</b> — timestamps, tools used, errors, and results.</li>
+    </ul>
+
+    <hr style="margin:25px 0; border-color:#203a63;">
+
+    <h2>Volatile Evidence Order (Live Response)</h2>
+    <p>
+        When a system is running, volatile data disappears quickly. This is the preferred 
+        acquisition order:
+    </p>
+
+    <ol>
+        <li>CPU registers, cache</li>
+        <li>RAM / Memory image</li>
+        <li>Network connections / active sessions</li>
+        <li>Running processes</li>
+        <li>Open files / handles</li>
+        <li>System time + BIOS time</li>
+        <li>Logged-in users</li>
+        <li>Disk data</li>
+    </ol>
+
+    <hr style="margin:25px 0; border-color:#203a63;">
+
+    <h2>Host-Based Evidence to Collect</h2>
+
+    <div class="accordion">Windows Host Triage Artifacts</div>
+    <div class="panel">
+        <ul>
+            <li>Event Logs (Security, System, Application)</li>
+            <li>PowerShell history</li>
+            <li>Registry hives (SAM, SYSTEM, SOFTWARE)</li>
+            <li>Autoruns & persistence locations</li>
+            <li>Scheduled tasks</li>
+            <li>Amcache & Shimcache</li>
+            <li>SRUM (System Resource Usage Monitor)</li>
+            <li>Prefetch files</li>
+            <li>WMI persistence</li>
+        </ul>
+    </div>
+
+    <div class="accordion">Linux Host Triage Artifacts</div>
+    <div class="panel">
+        <ul>
+            <li>/var/log/auth.log</li>
+            <li>/var/log/syslog</li>
+            <li>/etc/passwd & /etc/shadow</li>
+            <li>Bash history</li>
+            <li>Crontabs</li>
+            <li>Systemd units</li>
+            <li>SSH keys & authorized_keys</li>
+            <li>Running processes & network sockets</li>
+        </ul>
+    </div>
+
+    <div class="accordion">MacOS Host Triage Artifacts</div>
+    <div class="panel">
+        <ul>
+            <li>Unified logs</li>
+            <li>TCC.db (privacy permissions)</li>
+            <li>LaunchAgents / LaunchDaemons</li>
+            <li>Quarantine database</li>
+            <li>Kext extensions</li>
+            <li>Zsh/Bash history</li>
+        </ul>
+    </div>
+
+    <hr style="margin:25px 0; border-color:#203a63;">
+
+    <h2>Cloud Evidence Collection</h2>
+
+    <p>Cloud environments are identity-driven. Evidence comes from logs and control plane telemetry.</p>
+
+    <div class="accordion">Azure Evidence Sources</div>
+    <div class="panel">
+        <ul>
+            <li>Azure AD Sign-in Logs</li>
+            <li>M365 Unified Audit Log</li>
+            <li>Azure Activity Logs</li>
+            <li>Key Vault access logs</li>
+            <li>Storage access logs</li>
+            <li>Identity Protection alerts</li>
+        </ul>
+    </div>
+
+    <div class="accordion">AWS Evidence Sources</div>
+    <div class="panel">
+        <ul>
+            <li>CloudTrail</li>
+            <li>VPC Flow Logs</li>
+            <li>GuardDuty findings</li>
+            <li>S3 Access Logs</li>
+            <li>IAM policy change logs</li>
+        </ul>
+    </div>
+
+    <div class="accordion">Google Cloud Evidence Sources</div>
+    <div class="panel">
+        <ul>
+            <li>Cloud Audit Logs</li>
+            <li>VPC Flow Logs</li>
+            <li>Cloud Armor logs</li>
+            <li>BigQuery Access Logs</li>
+            <li>Identity logs</li>
+        </ul>
+    </div>
+
+    <hr style="margin:25px 0; border-color:#203a63;">
+
+    <h2>Network Evidence Collection</h2>
+
+    <ul>
+        <li>Firewall logs</li>
+        <li>IDS/IPS signatures</li>
+        <li>DLP detections</li>
+        <li>DARPA-style flow logs</li>
+        <li>VPN authentication logs</li>
+        <li>DNS logs (critical for identifying malware C2)</li>
+    </ul>
+
+    <p>Network traffic often reveals attacker intent before endpoints do.</p>
+
+    <hr style="margin:25px 0; border-color:#203a63;">
+
+    <h2>Chain of Custody (NIST Standard)</h2>
+
+    <p>
+        Chain of custody must show every human or system that interacted with evidence.
+    </p>
+
+    <ul>
+        <li><b>Who</b> acquired the evidence</li>
+        <li><b>When</b> it was acquired (timestamp)</li>
+        <li><b>What</b> tool or method was used</li>
+        <li><b>Where</b> it was stored</li>
+        <li><b>How</b> integrity was validated (e.g., hashes)</li>
+    </ul>
+
+    <p>
+        Your GitHub repository already includes a chain-of-custody PDF form — use it 
+        during live incident simulations.
+    </p>
+
+</div>
+<!-- ======================================== -->
+<!--    PART 4 — INTERACTIVE TRIAGE CHECKLIST   -->
+<!-- ======================================== -->
+
 <div class="card">
     <h2>Interactive Triage Checklist</h2>
 
-    <label class="check-item"><input type="checkbox"> Validate alert source</label><br>
-    <label class="check-item"><input type="checkbox"> Identify affected asset(s)</label><br>
-    <label class="check-item"><input type="checkbox"> Determine criticality</label><br>
-    <label class="check-item"><input type="checkbox"> Check for lateral movement</label><br>
-    <label class="check-item"><input type="checkbox"> Look for privilege escalation</label><br>
-    <label class="check-item"><input type="checkbox"> EDR/SIEM correlation review</label><br>
-    <label class="check-item"><input type="checkbox"> Containment required?</label><br>
-    <label class="check-item"><input type="checkbox"> Escalation needed?</label><br>
-</div>
+    <p>
+        Use this checklist during live incidents, SOC simulations, or DFIR training labs. 
+        It reflects NIST, CISA, and enterprise SOC best practices.
+    </p>
 
-<!-- SECTION 3 -->
-<div class="card">
-    <h2>DFIR Triage Process (Expandable)</h2>
-
-    <div class="accordion">1. Validate Alert</div>
-    <div class="panel">Confirm alert source, verify indicators, dismiss false positives.</div>
-
-    <div class="accordion">2. Identify Affected Assets</div>
-    <div class="panel">Determine which system, user, network, or application is impacted.</div>
-
-    <div class="accordion">3. Assign Severity</div>
-    <div class="panel">
-        Critical: Active threat, domain compromise, ransomware<br>
-        Major: Contained threat, medium impact<br>
-        Minor: Low risk or anomaly
+    <h3 style="color:#9dbdff;">Pre-Triage (Preparation)</h3>
+    <div class="checklist">
+        <label><input type="checkbox"> Verify the alert is routed to the correct queue</label>
+        <label><input type="checkbox"> Confirm timestamp accuracy (NTP clock drift check)</label>
+        <label><input type="checkbox"> Identify the alert source: SIEM, EDR/XDR, SOAR, cloud audit log</label>
+        <label><input type="checkbox"> Check for duplicate/related alerts</label>
+        <label><input type="checkbox"> Retrieve user/asset criticality rating</label>
+        <label><input type="checkbox"> Determine business impact potential</label>
+        <label><input type="checkbox"> Check threat intelligence for matching IoCs</label>
     </div>
 
-    <div class="accordion">4. Contain</div>
-    <div class="panel">Isolate host, disable account, block IP/domain, revoke tokens.</div>
+    <h3 style="color:#9dbdff;">Active Triage</h3>
+    <div class="checklist">
+        <label><input type="checkbox"> Validate whether the alert is real or false-positive</label>
+        <label><input type="checkbox"> Identify the affected system or identity</label>
+        <label><input type="checkbox"> Determine severity using triage matrix</label>
+        <label><input type="checkbox"> Assess whether lateral movement is occurring</label>
+        <label><input type="checkbox"> Look for privilege escalation indicators</label>
+        <label><input type="checkbox"> Check active network connections to unknown hosts</label>
+        <label><input type="checkbox"> Review process execution logs</label>
+        <label><input type="checkbox"> Capture memory snapshot (if required)</label>
+        <label><input type="checkbox"> Capture volatile logs before reboot</label>
+        <label><input type="checkbox"> Identify persistence mechanisms (if any)</label>
+        <label><input type="checkbox"> Determine if host isolation is necessary</label>
+    </div>
 
-    <div class="accordion">5. Document</div>
-    <div class="panel">Record everything: timestamps, actions taken, artifacts collected.</div>
+    <h3 style="color:#9dbdff;">Post-Triage (Stabilization)</h3>
+    <div class="checklist">
+        <label><input type="checkbox"> Document all triage actions with timestamps</label>
+        <label><input type="checkbox"> Tag evidence with chain-of-custody metadata</label>
+        <label><input type="checkbox"> Escalate to Tier 2/IR Team if severity is High/Critical</label>
+        <label><input type="checkbox"> Notify SOC lead / IR manager</label>
+        <label><input type="checkbox"> Move incident to “Containment” or “Monitoring” phase</label>
+        <label><input type="checkbox"> Add IoCs to detection ruleset (blocklists, SIEM rules)</label>
+        <label><input type="checkbox"> Initiate forensic imaging if required</label>
+        <label><input type="checkbox"> Update ticket with triage classification</label>
+        <label><input type="checkbox"> Confirm asset has been isolated or contained</label>
+        <label><input type="checkbox"> Tag incident with MITRE ATT&CK mapping</label>
+        <label><input type="checkbox"> Complete the triage summary report</label>
+    </div>
+
+    <h3 style="color:#9dbdff;">Analyst Self-Verification</h3>
+    <p>
+        SOC analysts must self-validate that triage decisions were accurate, justified, and 
+        aligned with organizational IR policies.
+    </p>
+
+    <div class="checklist">
+        <label><input type="checkbox"> Did I rely on verified data, not assumptions?</label>
+        <label><input type="checkbox"> Did I avoid confirmation bias?</label>
+        <label><input type="checkbox"> Did I escalate at the correct severity?</label>
+        <label><input type="checkbox"> Did I document everything thoroughly?</label>
+        <label><input type="checkbox"> Did I follow NIST-aligned evidence collection steps?</label>
+        <label><input type="checkbox"> Would my triage steps hold up under IR team review?</label>
+    </div>
+
 </div>
+<!-- ======================================== -->
+<!--      PART 5 — FULL TRIAGE PROCESS        -->
+<!-- ======================================== -->
 
-<!-- SECTION 4 -->
 <div class="card">
-    <h2>Interactive Quiz</h2>
-    <form id="quiz">
+    <h2>DFIR Triage Process (Full Lifecycle)</h2>
 
-        <p>1. What is the purpose of triage?</p>
-        <select class="quiz-select" name="q1">
-            <option value="">Select...</option>
-            <option value="A">Quick assessment and prioritization</option>
-            <option value="B">Full forensic analysis</option>
-            <option value="C">System recovery</option>
+    <p>
+        Triage is not a single action — it is a structured, repeatable DFIR lifecycle.  
+        This section breaks down the entire triage process in stages, aligning with 
+        NIST SP 800-61, CISA MSSP guidelines, and modern SOC workflows.
+    </p>
+
+    <h3 style="color:#9dbdff;">Triage Levels (Tiered SOC Model)</h3>
+
+    <ul>
+        <li><b>Tier 1 (Alert Intake)</b> – Validate, classify, prioritize.</li>
+        <li><b>Tier 2 (Incident Analyst)</b> – Deep triage, correlation, evidence review.</li>
+        <li><b>Tier 3 (DFIR/Threat Hunter)</b> – Forensics, threat intelligence, containment strategy.</li>
+    </ul>
+
+    <p>
+        Tier 1 analysts perform the majority of triage.  
+        Tier 2+ takes over only if severity is high or evidence is complex.
+    </p>
+
+    <hr style="margin:25px 0; border-color:#203a63;">
+
+    <h2>Triage Stage Breakdown</h2>
+
+    <div class="accordion">Stage 1 — Alert Validation</div>
+    <div class="panel">
+        <p>
+            Confirm the alert is accurate, relevant, and worth escalating.
+        </p>
+        <ul>
+            <li>Check SIEM rule logic</li>
+            <li>Compare against baselines</li>
+            <li>Check for similar past alerts</li>
+            <li>Lookup IoCs in threat intel sources</li>
+        </ul>
+        <p><b>Goal:</b> Determine if this is real or noise.</p>
+    </div>
+
+    <div class="accordion">Stage 2 — Identify Affected Assets</div>
+    <div class="panel">
+        <p>Determine what is at risk:</p>
+        <ul>
+            <li>Endpoints / servers</li>
+            <li>Cloud identities</li>
+            <li>User accounts</li>
+            <li>Applications</li>
+            <li>Databases</li>
+            <li>Network segments</li>
+        </ul>
+        <p><b>Goal:</b> Map the attack surface.</p>
+    </div>
+
+    <div class="accordion">Stage 3 — Severity Classification</div>
+    <div class="panel">
+        <p>
+            Severity is based on <b>impact + likelihood</b>.
+        </p>
+        <ul>
+            <li><b>Critical</b> – Active threat, lateral movement, data loss risk</li>
+            <li><b>Major</b> – Suspicious behavior with possible escalation</li>
+            <li><b>Minor</b> – Low-risk anomaly, monitoring required</li>
+        </ul>
+        <p><b>Goal:</b> Decide urgency & escalation.</p>
+    </div>
+
+    <div class="accordion">Stage 4 — Rapid Investigation</div>
+    <div class="panel">
+        <p>Perform accelerated analysis:</p>
+        <ul>
+            <li>Check active processes</li>
+            <li>Identify suspicious network activity</li>
+            <li>Analyze cloud logs</li>
+            <li>Verify user activity</li>
+            <li>Review relevant EDR events</li>
+        </ul>
+        <p><b>Goal:</b> Confirm threat presence.</p>
+    </div>
+
+    <div class="accordion">Stage 5 — Containment Decision</div>
+    <div class="panel">
+        <p>Containment options include:</p>
+        <ul>
+            <li>EDR isolation</li>
+            <li>Account disable</li>
+            <li>Firewall block</li>
+            <li>Token/session revocation</li>
+            <li>Quarantine of artifacts</li>
+        </ul>
+        <p><b>Goal:</b> Stop the threat before it spreads.</p>
+    </div>
+
+    <div class="accordion">Stage 6 — Documentation</div>
+    <div class="panel">
+        <p>Proper documentation ensures IR continuity:</p>
+        <ul>
+            <li>Timeline of actions</li>
+            <li>Evidence collected</li>
+            <li>Severity rating</li>
+            <li>Containment justification</li>
+            <li>Escalation rationale</li>
+        </ul>
+        <p><b>Goal:</b> Ensure auditability & chain-of-custody.</p>
+    </div>
+
+    <div class="accordion">Stage 7 — Escalation Path</div>
+    <div class="panel">
+        <p>Escalate to one or more groups based on severity:</p>
+        <ul>
+            <li>Tier 2 SOC Analyst</li>
+            <li>DFIR Team</li>
+            <li>Threat Hunting Team</li>
+            <li>Cloud Security Team</li>
+            <li>Identity & Access Management (IAM)</li>
+            <li>Incident Commander</li>
+        </ul>
+        <p><b>Goal:</b> Ensure the right team engages.</p>
+    </div>
+
+    <div class="accordion">Stage 8 — Handoff to Incident Response</div>
+    <div class="panel">
+        <p>
+            When triage confirms malicious activity, the incident is fully activated:
+        </p>
+        <ul>
+            <li>IR classification assigned</li>
+            <li>Containment & eradication plan built</li>
+            <li>Forensics begins (memory, disk, cloud artifacts)</li>
+            <li>Communications plan initiated</li>
+            <li>Business owners notified</li>
+        </ul>
+        <p><b>Goal:</b> Move to IR lifecycle smoothly.</p>
+    </div>
+
+</div>
+<!-- ======================================== -->
+<!--      PART 7 — FULL 20-QUESTION QUIZ       -->
+<!-- ======================================== -->
+
+<div class="card">
+    <h2>DFIR Triage Mastery Quiz (20 Questions)</h2>
+
+    <p>
+        This quiz tests your understanding of triage, NIST alignment, MITRE ATT&CK, 
+        evidence collection, severity classification, and SOC rapid assessment methods.
+    </p>
+
+    <form id="quizForm">
+
+        <!-- ====== QUESTIONS START ====== -->
+
+        <p><b>1. What is the core purpose of triage?</b></p>
+        <select name="q1">
+            <option value="">Select…</option>
+            <option value="A">Rapid classification and prioritization of events</option>
+            <option value="B">Full forensic memory analysis</option>
+            <option value="C">Long-term threat hunting</option>
         </select>
 
-        <p>2. Which NIST document defines incident handling?</p>
-        <select class="quiz-select" name="q2">
-            <option value="">Select...</option>
+        <p><b>2. Which NIST document defines incident handling lifecycle?</b></p>
+        <select name="q2">
+            <option value="">Select…</option>
             <option value="A">NIST SP 800-61</option>
-            <option value="B">NIST SP 500-291</option>
-            <option value="C">NIST SP 1800-25</option>
+            <option value="B">NIST SP 800-171</option>
+            <option value="C">NIST SP 500-291</option>
         </select>
 
-        <p>3. A “Critical” triage classification means:</p>
-        <select class="quiz-select" name="q3">
-            <option value="">Select...</option>
-            <option value="A">Active threat / high risk</option>
-            <option value="B">Information-only alert</option>
-            <option value="C">User training issue</option>
+        <p><b>3. Which evidence type is MOST volatile?</b></p>
+        <select name="q3">
+            <option value="">Select…</option>
+            <option value="A">Memory (RAM)</option>
+            <option value="B">System logs</option>
+            <option value="C">Disk images</option>
         </select>
 
-        <button type="button" onclick="gradeQuiz()">Submit</button>
-        <div id="result"></div>
+        <p><b>4. Beaconing to known C2 servers aligns with which MITRE tactic?</b></p>
+        <select name="q4">
+            <option value="">Select…</option>
+            <option value="A">Command & Control</option>
+            <option value="B">Persistence</option>
+            <option value="C">Initial Access</option>
+        </select>
+
+        <p><b>5. Suspicious new admin account indicates what?</b></p>
+        <select name="q5">
+            <option value="">Select…</option>
+            <option value="A">Privilege escalation</option>
+            <option value="B">Discovery</option>
+            <option value="C">Defense evasion</option>
+        </select>
+
+        <p><b>6. What should be collected FIRST in live forensics?</b></p>
+        <select name="q6">
+            <option value="">Select…</option>
+            <option value="A">RAM</option>
+            <option value="B">Disk image</option>
+            <option value="C">Registry hive</option>
+        </select>
+
+        <p><b>7. 100+ failed logins usually indicates:</b></p>
+        <select name="q7">
+            <option value="">Select…</option>
+            <option value="A">Authentication attack / brute force</option>
+            <option value="B">Normal daily activity</option>
+            <option value="C">Hardware malfunction</option>
+        </select>
+
+        <p><b>8. Which logs identify privilege escalation MOST reliably?</b></p>
+        <select name="q8">
+            <option value="">Select…</option>
+            <option value="A">Security Event Logs</option>
+            <option value="B">Application Logs</option>
+            <option value="C">Print Spooler Logs</option>
+        </select>
+
+        <p><b>9. Which cloud log identifies suspicious IAM activity?</b></p>
+        <select name="q9">
+            <option value="">Select…</option>
+            <option value="A">AWS CloudTrail</option>
+            <option value="B">VPC Flow Logs</option>
+            <option value="C">Object Storage Logs</option>
+        </select>
+
+        <p><b>10. A new persistence mechanism belongs to which MITRE tactic?</b></p>
+        <select name="q10">
+            <option value="">Select…</option>
+            <option value="A">Persistence</option>
+            <option value="B">Execution</option>
+            <option value="C">Reconnaissance</option>
+        </select>
+
+        <p><b>11. What is the first Tier-1 responsibility?</b></p>
+        <select name="q11">
+            <option value="">Select…</option>
+            <option value="A">Validate alert legitimacy</option>
+            <option value="B">Perform disk imaging</option>
+            <option value="C">Draft long-term remediation plans</option>
+        </select>
+
+        <p><b>12. Lateral movement indicators are found in:</b></p>
+        <select name="q12">
+            <option value="">Select…</option>
+            <option value="A">Network connection logs</option>
+            <option value="B">Printer logs</option>
+            <option value="C">Browser history</option>
+        </select>
+
+        <p><b>13. Which platform produces identity-based audit logs?</b></p>
+        <select name="q13">
+            <option value="">Select…</option>
+            <option value="A">Azure AD</option>
+            <option value="B">Google Maps</option>
+            <option value="C">YouTube</option>
+        </select>
+
+        <p><b>14. IoCs from threat intelligence should be:</b></p>
+        <select name="q14">
+            <option value="">Select…</option>
+            <option value="A">Correlated with internal telemetry</option>
+            <option value="B">Ignored until escalation</option>
+            <option value="C">Deleted after triage</option>
+        </select>
+
+        <p><b>15. Incorrect system time affects:</b></p>
+        <select name="q15">
+            <option value="">Select…</option>
+            <option value="A">Event correlation accuracy</option>
+            <option value="B">CPU temperature</option>
+            <option value="C">Screen brightness</option>
+        </select>
+
+        <p><b>16. A user reporting a phishing email is:</b></p>
+        <select name="q16">
+            <option value="">Select…</option>
+            <option value="A">A triage-relevant event</option>
+            <option value="B">A non-security helpdesk request</option>
+            <option value="C">Always a false positive</option>
+        </select>
+
+        <p><b>17. DNS logs are MOST valuable for:</b></p>
+        <select name="q17">
+            <option value="">Select…</option>
+            <option value="A">Detecting malware command-and-control</option>
+            <option value="B">Tracking user keyboard speed</option>
+            <option value="C">Determining screen resolution</option>
+        </select>
+
+        <p><b>18. Evidence integrity is proven using:</b></p>
+        <select name="q18">
+            <option value="">Select…</option>
+            <option value="A">Cryptographic hashing (SHA-256)</option>
+            <option value="B">Email backup</option>
+            <option value="C">Screenshot attachments</option>
+        </select>
+
+        <p><b>19. Chain-of-custody must track:</b></p>
+        <select name="q19">
+            <option value="">Select…</option>
+            <option value="A">Who handled evidence and when</option>
+            <option value="B">The SOC analyst’s lunch break</option>
+            <option value="C">Approximate desk temperature</option>
+        </select>
+
+        <p><b>20. Critical triage events require:</b></p>
+        <select name="q20">
+            <option value="">Select…</option>
+            <option value="A">Immediate escalation to IR</option>
+            <option value="B">No action needed</option>
+            <option value="C">Wait until next business day</option>
+        </select>
+
+        <!-- ====== QUIZ SUBMIT BUTTON ====== -->
+        <button type="button" onclick="gradeQuiz20()">Submit Quiz</button>
+
+        <div id="score"></div>
 
     </form>
 </div>
 
-<!-- SECTION 5 -->
+<!-- ======== QUIZ JAVASCRIPT ======== -->
+<script>
+function gradeQuiz20() {
+    let answers = {
+        q1:"A", q2:"A", q3:"A", q4:"A", q5:"A",
+        q6:"A", q7:"A", q8:"A", q9:"A", q10:"A",
+        q11:"A", q12:"A", q13:"A", q14:"A", q15:"A",
+        q16:"A", q17:"A", q18:"A", q19:"A", q20:"A"
+    };
+
+    let score = 0;
+
+    for (let q in answers) {
+        let val = document.querySelector(`[name="${q}"]`).value;
+        if (val === answers[q]) score++;
+    }
+
+    document.getElementById("score").innerHTML = 
+        "<br><b>Score: " + score + " / 20</b><br>" +
+        "<span style='color:#78a7ff;'>"+ 
+        (score >= 18 ? "Excellent — SOC-ready." :
+         score >= 14 ? "Good — continue practicing." :
+         score >= 10 ? "Fair — needs improvement." :
+         "Critical — revisit triage fundamentals.") +
+        "</span>";
+}
+</script>
+<!-- ======================================== -->
+<!--      PART 8 — DECISION TREE & PLAYBOOKS   -->
+<!-- ======================================== -->
+
+<div class="card">
+    <h2>Interactive Triage Decision Tree</h2>
+
+    <p>This interactive decision tree guides analysts during rapid incident assessment.</p>
+
+    <div class="accordion">Step 1 — Is the alert confirmed malicious?</div>
+    <div class="panel">
+        <p>If YES → proceed to Step 2.<br>
+        If NO → document and close with justification.</p>
+    </div>
+
+    <div class="accordion">Step 2 — Is the threat active RIGHT NOW?</div>
+    <div class="panel">
+        <p>If YES → isolate affected systems immediately (EDR/SOAR automation recommended).</p>
+        <p>If NO → proceed to impact assessment.</p>
+    </div>
+
+    <div class="accordion">Step 3 — What is the asset criticality?</div>
+    <div class="panel">
+        <ul>
+            <li><b>Tier 0</b>: Domain controllers, IAM, cloud root accounts</li>
+            <li><b>Tier 1</b>: Production servers, financial systems</li>
+            <li><b>Tier 2</b>: Standard employee workstations</li>
+        </ul>
+        <p>Higher criticality = higher triage severity.</p>
+    </div>
+
+    <div class="accordion">Step 4 — Is lateral movement observed?</div>
+    <div class="panel">
+        <p>If YES → escalate to IR immediately (Critical severity).</p>
+        <p>If NO → continue risk evaluation.</p>
+    </div>
+
+    <div class="accordion">Step 5 — Classify Severity</div>
+    <div class="panel">
+        <p><b>Critical:</b> Active threat, privilege escalation, C2, data access</p>
+        <p><b>Major:</b> Suspicious activity with potential escalation</p>
+        <p><b>Minor:</b> Low-risk anomaly</p>
+    </div>
+
+</div>
+
+
+<!-- ======================================== -->
+<!--      SOC ESCALATION MATRIX SECTION        -->
+<!-- ======================================== -->
+
+<div class="card">
+    <h2>SOC Escalation Matrix (Critical / Major / Minor)</h2>
+
+    <p>This escalation matrix determines who gets notified and when.</p>
+
+    <table style="width:100%; border-collapse:collapse; color:#d8e2ff;">
+        <tr style="background:#13244a;">
+            <th style="padding:10px; border:1px solid #203a63;">Severity</th>
+            <th style="padding:10px; border:1px solid #203a63;">Description</th>
+            <th style="padding:10px; border:1px solid #203a63;">Required Action</th>
+            <th style="padding:10px; border:1px solid #203a63;">Escalation</th>
+        </tr>
+        <tr>
+            <td style="padding:10px; border:1px solid #203a63;"><b>Critical</b></td>
+            <td style="padding:10px; border:1px solid #203a63;">Active threat, lateral movement, data loss, C2</td>
+            <td style="padding:10px; border:1px solid #203a63;">Immediate containment + isolation</td>
+            <td style="padding:10px; border:1px solid #203a63;">IR Lead, CISO, Cloud/IAM</td>
+        </tr>
+        <tr>
+            <td style="padding:10px; border:1px solid #203a63;"><b>Major</b></td>
+            <td style="padding:10px; border:1px solid #203a63;">Confirmed suspicious behavior</td>
+            <td style="padding:10px; border:1px solid #203a63;">Deep triage + monitoring + rule updates</td>
+            <td style="padding:10px; border:1px solid #203a63;">Tier 2 SOC Analyst</td>
+        </tr>
+        <tr>
+            <td style="padding:10px; border:1px solid #203a63;"><b>Minor</b></td>
+            <td style="padding:10px; border:1px solid #203a63;">Low-risk anomaly</td>
+            <td style="padding:10px; border:1px solid #203a63;">Document and monitor</td>
+            <td style="padding:10px; border:1px solid #203a63;">Tier 1 SOC</td>
+        </tr>
+    </table>
+</div>
+
+
+<!-- ======================================== -->
+<!--          TRIAGE PLAYBOOK LIBRARY         -->
+<!-- ======================================== -->
+
+<div class="card">
+    <h2>DFIR Triage Playbook Library</h2>
+
+    <p>Use these playbooks during live incidents or SOC training scenarios.</p>
+
+    <div class="accordion">Endpoint Compromise Playbook</div>
+    <div class="panel">
+        <ul>
+            <li>Check EDR alerts</li>
+            <li>Identify malicious processes</li>
+            <li>Isolate host</li>
+            <li>Collect memory + logs</li>
+            <li>Escalate if persistence observed</li>
+        </ul>
+    </div>
+
+    <div class="accordion">Network Intrusion Playbook</div>
+    <div class="panel">
+        <ul>
+            <li>Review firewall + IDS/IPS logs</li>
+            <li>Identify suspicious flows</li>
+            <li>Block malicious IPs/domains</li>
+            <li>Check for lateral movement</li>
+            <li>Escalate to IR for deeper inspection</li>
+        </ul>
+    </div>
+
+    <div class="accordion">Cloud Identity Attack Playbook</div>
+    <div class="panel">
+        <ul>
+            <li>Review identity logs (AAD, CloudTrail, GCP IAM)</li>
+            <li>Check for MFA bypass attempts</li>
+            <li>Revoke sessions + tokens</li>
+            <li>Force password reset</li>
+            <li>Escalate if privilege escalation occurred</li>
+        </ul>
+    </div>
+
+    <div class="accordion">Phishing / Social Engineering Playbook</div>
+    <div class="panel">
+        <ul>
+            <li>Collect suspicious email</li>
+            <li>Extract URLs/domains</li>
+            <li>Run sandbox analysis</li>
+            <li>Reset user credentials</li>
+            <li>Block indicators enterprise-wide</li>
+        </ul>
+    </div>
+
+    <div class="accordion">Ransomware Playbook (Critical)</div>
+    <div class="panel">
+        <ul>
+            <li>Immediate host isolation</li>
+            <li>Stop encryption processes</li>
+            <li>Identify initial vector</li>
+            <li>Preserve volatile evidence</li>
+            <li>Engage IR Commander + C-suite</li>
+        </ul>
+    </div>
+
+</div>
+
+
+<!-- ======================================== -->
+<!--   DOWNLOAD SECTION — GITHUB HOSTED PDFS  -->
+<!-- ======================================== -->
+
 <div class="card">
     <h2>Downloadable DFIR Triage Resources</h2>
 
     <ul>
-        <li><a href="Triage_Form.pdf" download>📄 Triage Form (Fillable)</a></li>
-        <li><a href="Triage_Decision_Matrix.pdf" download>📊 Severity Matrix</a></li>
-        <li><a href="NIST_IR_Triage_Section.pdf" download>📘 NIST IR Plan – Triage Section</a></li>
-        <li><a href="Triage_Playbook.pdf" download>⚠️ DFIR Triage Playbook</a></li>
+        <li><a href="https://burnt-exe.github.io/dfir/Triage_Form.pdf" download>📄 DFIR Triage Form (Fillable)</a></li>
+        <li><a href="https://burnt-exe.github.io/dfir/Triage_Decision_Matrix.pdf" download>📊 Severity Decision Matrix</a></li>
+        <li><a href="https://burnt-exe.github.io/dfir/NIST_IR_Triage_Section.pdf" download>📘 NIST IR Plan – Triage Section</a></li>
+        <li><a href="https://burnt-exe.github.io/dfir/Triage_Playbook.pdf" download>⚠️ DFIR Triage Playbook</a></li>
     </ul>
 </div>
 
+
+<!-- ======================================== -->
+<!--  MOTIVATIONAL SECURITY QUOTE (ARABIC)     -->
+<!-- ======================================== -->
+
+<div class="card">
+    <h2>Security Motivation</h2>
+
+    <p style="font-size:1.3rem; text-align:center; color:#9dbdff;">
+        "في كل حادثة، تكمن فرصة لإثبات قوتك وانضباطك."
+    </p>
+
+    <p style="text-align:center; color:#7fa2e6;">
+        — A reminder that discipline in triage protects entire organizations.
+    </p>
 </div>
 
+
+</div> <!-- END CONTAINER -->
+
+
 <footer>
-    © 2025 DFIR Triage Training Module • Skunkworks Africa
+    © 2025 • DFIR TRIAGE TRAINING • Skunkworks Africa • burnt-exe
 </footer>
 
-<script>
-// Accordion
-let acc=document.getElementsByClassName("accordion");
-for(let i=0;i<acc.length;i++){
-    acc[i].onclick=function(){
-        this.classList.toggle("active");
-        let panel=this.nextElementSibling;
-        panel.style.display = panel.style.display==="block"?"none":"block";
-    }
-}
-
-// Quiz grading
-function gradeQuiz(){
-    let score=0;
-    const answers={q1:"A",q2:"A",q3:"A"};
-
-    for(let q in answers){
-        let val=document.querySelector(`[name="${q}"]`).value;
-        if(val===answers[q]) score++;
-    }
-
-    document.getElementById("result").innerHTML=`Score: ${score} / 3`;
-}
-</script>
 </body>
 </html>
