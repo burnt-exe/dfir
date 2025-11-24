@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>DFIR301 – Final Mock Exam (Term Evaluation)</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --card: #151a2c;
+      --accent: #3ba7ff;
+      --accent-soft: rgba(59, 167, 255, 0.1);
+      --text-main: #f5f7ff;
+      --text-muted: #a2abc7;
+      --danger: #ff5c7a;
+      --success: #42d392;
+      --border: #262c40;
+      --font-main: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
+        Roboto, sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 2rem 0.5rem;
+      font-family: var(--font-main);
+      background: radial-gradient(circle at top, #161b33 0, #050814 55%, #000 100%);
+      color: var(--text-main);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      background: linear-gradient(145deg, #121729, #090d18);
+      border-radius: 16px;
+      padding: 2rem 2.5rem 2.5rem;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.7);
+      border: 1px solid var(--border);
+    }
+
+    h1, h2, h3 {
+      margin-top: 0;
+      letter-spacing: 0.03em;
+    }
+
+    h1 {
+      font-size: 1.9rem;
+      text-align: center;
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      margin-bottom: 1.5rem;
+      font-size: 0.95rem;
+    }
+
+    .quote {
+      margin: 1rem auto 2rem;
+      padding: 1rem 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--accent-soft);
+      background: radial-gradient(circle at left, var(--accent-soft), transparent);
+      font-size: 1rem;
+      line-height: 1.6;
+      max-width: 800px;
+    }
+
+    .quote-main {
+      font-size: 1.15rem;
+      font-weight: 600;
+      direction: rtl;
+      text-align: right;
+    }
+
+    .quote-author {
+      display: block;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      text-align: left;
+    }
+
+    section {
+      margin-bottom: 2rem;
+    }
+
+    .card {
+      background: var(--card);
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      padding: 1.25rem 1.5rem;
+      margin-bottom: 1.25rem;
+    }
+
+    .section-title {
+      font-size: 1.2rem;
+      margin-bottom: 0.75rem;
+      border-left: 4px solid var(--accent);
+      padding-left: 0.6rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.6rem;
+      font-size: 0.9rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.55rem 0.7rem;
+      margin-top: 0.2rem;
+      border-radius: 8px;
+      border: 1px solid #343b56;
+      background: #050814;
+      color: var(--text-main);
+      font-size: 0.9rem;
+    }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    select:focus,
+    textarea:focus {
+      outline: 2px solid var(--accent);
+      border-color: var(--accent);
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .muted {
+      color: var(--text-muted);
+      font-size: 0.85rem;
+    }
+
+    ol {
+      padding-left: 1.3rem;
+    }
+
+    li {
+      margin-bottom: 1.1rem;
+    }
+
+    .question-text {
+      margin-bottom: 0.35rem;
+      font-size: 0.95rem;
+    }
+
+    .question-meta {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      margin-bottom: 0.25rem;
+    }
+
+    select {
+      max-width: 480px;
+    }
+
+    .correct {
+      border-color: rgba(66, 211, 146, 0.8) !important;
+      background: rgba(66, 211, 146, 0.08) !important;
+    }
+
+    .incorrect {
+      border-color: rgba(255, 92, 122, 0.9) !important;
+      background: rgba(255, 92, 122, 0.08) !important;
+    }
+
+    .unanswered {
+      border-color: rgba(255, 205, 86, 0.9) !important;
+      background: rgba(255, 205, 86, 0.08) !important;
+    }
+
+    .btn-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+      margin-top: 1.25rem;
+    }
+
+    button {
+      border-radius: 999px;
+      border: 1px solid transparent;
+      padding: 0.6rem 1.4rem;
+      font-size: 0.95rem;
+      cursor: pointer;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent), #7bd5ff);
+      color: #050814;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border-color: var(--border);
+      color: var(--text-main);
+    }
+
+    .btn-primary:hover {
+      filter: brightness(1.05);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    #results {
+      margin-top: 1.5rem;
+      padding: 1.25rem 1.5rem;
+      border-radius: 12px;
+      border: 1px solid var(--border);
+      background: radial-gradient(circle at right, var(--accent-soft), transparent);
+    }
+
+    #results.hidden {
+      display: none;
+    }
+
+    .results-header {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 0.75rem;
+      align-items: baseline;
+      margin-bottom: 0.6rem;
+    }
+
+    .score-badge {
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      border: 1px solid var(--border);
+      background: rgba(0, 0, 0, 0.35);
+    }
+
+    .score-main {
+      font-size: 1.6rem;
+      font-weight: 700;
+    }
+
+    .score-main span {
+      color: var(--accent);
+    }
+
+    .badge-success {
+      border-color: rgba(66, 211, 146, 0.7);
+      color: var(--success);
+    }
+
+    .badge-warning {
+      border-color: rgba(255, 205, 86, 0.8);
+      color: #ffcd56;
+    }
+
+    .badge-danger {
+      border-color: rgba(255, 92, 122, 0.9);
+      color: var(--danger);
+    }
+
+    .results-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 0.75rem;
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    .results-item-label {
+      color: var(--text-muted);
+      font-size: 0.8rem;
+    }
+
+    .results-item-value {
+      font-weight: 600;
+    }
+
+    .note-box {
+      margin-top: 0.75rem;
+      padding: 0.7rem 0.9rem;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, 0.02);
+      border: 1px dashed var(--border);
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .pill {
+      display: inline-block;
+      padding: 0.18rem 0.55rem;
+      font-size: 0.75rem;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      margin-left: 0.3rem;
+    }
+
+    @media (max-width: 720px) {
+      .container {
+        padding: 1.5rem 1.1rem 1.7rem;
+      }
+    }
+
+    @media print {
+      body {
+        background: #ffffff;
+        color: #000000;
+      }
+      .container {
+        box-shadow: none;
+        border: none;
+        background: #ffffff;
+      }
+      button {
+        display: none !important;
+      }
+      select,
+      textarea,
+      input {
+        border-color: #999;
+        background: #fff;
+        color: #000;
+      }
+      .correct,
+      .incorrect,
+      .unanswered {
+        background: #fff !important;
+        border-color: #999 !important;
+      }
+      #results {
+        border-color: #ccc;
+        background: #f7f7f7;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>DFIR301 – Final Mock Exam</h1>
+    <div class="subtitle">Term Grade Evaluation &mdash; Digital Forensics &amp; Incident Response</div>
+
+    <div class="quote">
+      <div class="quote-main">
+        العلم بلا تطبيق كالسيف بلا حد، والأمن بلا تحقيق كالحصن بلا باب.
+      </div>
+      <span class="quote-author">
+        &mdash; رسالة إلى محللي DFIR: المعرفة قوة فقط عندما تُستخدم بحكمة
+      </span>
+    </div>
+
+    <form id="examForm" onsubmit="gradeExam(event)">
+      <!-- Student Info -->
+      <section id="student-info" class="card">
+        <h2 class="section-title">Student Details</h2>
+        <p class="muted">
+          Please complete all fields before submitting. These details will also appear on the PDF export.
+        </p>
+        <div class="student-grid">
+          <label>
+            Full Name
+            <input type="text" id="studentName" name="studentName" required />
+          </label>
+          <label>
+            Student ID / Number
+            <input type="text" id="studentId" name="studentId" required />
+          </label>
+          <label>
+            Email Address
+            <input type="email" id="studentEmail" name="studentEmail" required />
+          </label>
+          <label>
+            Class / Group
+            <input type="text" id="studentClass" name="studentClass" placeholder="e.g. DFIR301-Qatar-Evening" />
+          </label>
+        </div>
+      </section>
+
+      <!-- Instructions -->
+      <section class="card">
+        <h2 class="section-title">Instructions</h2>
+        <ul class="muted">
+          <li>Section A: 20 multiple choice questions (MCQs). Each question has one best answer.</li>
+          <li>Section B: 5 written questions. Answer in complete sentences with DFIR terminology.</li>
+          <li>MCQs are auto-graded on submission. Written answers require manual marking.</li>
+          <li>Click <strong>“Save / Print as PDF”</strong> after submission to export your answers and score.</li>
+          <li>Aim for depth: reference NIST SP 800-61r3, CSF 2.0, ACPO, and acquisition concepts where relevant.</li>
+        </ul>
+      </section>
+
+      <!-- MCQ Section -->
+      <section id="mcq" class="card">
+        <h2 class="section-title">Section A &mdash; Multiple Choice (20 questions)</h2>
+        <p class="muted">Select the best option for each question. All MCQs are based on DFIR301 content.</p>
+
+        <ol>
+          <li>
+            <div class="question-meta">Q1 &middot; DFIR fundamentals</div>
+            <div class="question-text">
+              In an enterprise environment, what is the <strong>primary combined goal</strong> of Digital Forensics and Incident Response (DFIR)?
+            </div>
+            <select id="q1" name="q1" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. To collect as much data as possible from every system.</option>
+              <option value="B">B. To punish attackers using any technical means available.</option>
+              <option value="C">C. To minimise business impact while preserving defensible digital evidence for investigation and legal use.</option>
+              <option value="D">D. To ensure firewalls and antivirus are always updated.</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q2 &middot; Locard’s Principle</div>
+            <div class="question-text">
+              Locard’s Principle applied to cybersecurity implies which of the following during a compromise?
+            </div>
+            <select id="q2" name="q2" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. Skilled attackers can always erase all traces of their activity.</option>
+              <option value="B">B. Any interaction between attacker and system leaves traces on both the attacker’s tools and the target environment.</option>
+              <option value="C">C. Evidence only exists in RAM and is lost on shutdown.</option>
+              <option value="D">D. Digital evidence is unreliable unless printed on paper.</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q3 &middot; NIST SP 800-61r3 &amp; CSF 2.0</div>
+            <div class="question-text">
+              According to NIST SP 800-61r3’s mapping to CSF 2.0, which Functions most closely represent the <strong>preparation</strong> part of the incident response life cycle?
+            </div>
+            <select id="q3" name="q3" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. Detect (DE) and Respond (RS)</option>
+              <option value="B">B. Govern (GV), Identify (ID), and Protect (PR)</option>
+              <option value="C">C. Identify (ID), Detect (DE), and Recover (RC)</option>
+              <option value="D">D. Respond (RS) and Recover (RC)</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q4 &middot; Events vs Incidents</div>
+            <div class="question-text">
+              Your SIEM reports multiple failed logins from one IP followed by a successful login to an admin account. According to NIST SP 800-61r3 definitions, what is this <strong>initially</strong> most accurately classified as?
+            </div>
+            <select id="q4" name="q4" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. A benign event.</option>
+              <option value="B">B. An adverse cybersecurity event that may indicate an incident.</option>
+              <option value="C">C. A confirmed cybersecurity incident.</option>
+              <option value="D">D. A false positive and can be ignored.</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q5 &middot; CSF Govern Function</div>
+            <div class="question-text">
+              Which CSF 2.0 Function is primarily responsible for setting the organisation’s cybersecurity <strong>strategy, policies, and risk appetite</strong> that guide incident response?
+            </div>
+            <select id="q5" name="q5" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. Identify (ID)</option>
+              <option value="B">B. Detect (DE)</option>
+              <option value="C">C. Govern (GV)</option>
+              <option value="D">D. Recover (RC)</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q6 &middot; Continuous improvement</div>
+            <div class="question-text">
+              After a major ransomware incident, the organisation runs a lessons-learned workshop and updates its IR plan, backup architecture, and training. Under CSF 2.0, which Category best represents this activity?
+            </div>
+            <select id="q6" name="q6" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. DE.AE (Anomalies and Events)</option>
+              <option value="B">B. ID.IM (Improvement)</option>
+              <option value="C">C. RS.MI (Mitigation)</option>
+              <option value="D">D. RC.RP (Recovery Planning)</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q7 &middot; Live vs dead acquisition</div>
+            <div class="question-text">
+              An analyst encounters a laptop protected with full-disk encryption (e.g. BitLocker). It is currently powered on and unlocked, and shutting it down would lose the decryption key. What is the <strong>most appropriate</strong> acquisition approach?
+            </div>
+            <select id="q7" name="q7" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. Power it off immediately and perform dead physical acquisition.</option>
+              <option value="B">B. Only copy a few user documents via USB.</option>
+              <option value="C">C. Perform live acquisition, capturing RAM and a logical image while the drive is decrypted.</option>
+              <option value="D">D. Remove the SSD and perform chip-off acquisition only.</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q8 &middot; Order of Volatility</div>
+            <div class="question-text">
+              You are first responder to an active intrusion on a critical server that must remain online. According to the Order of Volatility principle, which evidence should you prioritise <strong>first</strong>?
+            </div>
+            <select id="q8" name="q8" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. Historical backup tapes in offsite storage.</option>
+              <option value="B">B. Full disk image of all attached storage.</option>
+              <option value="C">C. RAM capture and running process/network connection information.</option>
+              <option value="D">D. Archived web server logs from six months ago.</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q9 &middot; E01 image format</div>
+            <div class="question-text">
+              Why is the Expert Witness (E01) format commonly used for forensic images instead of a raw <code>dd</code> image?
+            </div>
+            <select id="q9" name="q9" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. E01 files are human-readable without any tools.</option>
+              <option value="B">B. E01 automatically bypasses all disk encryption.</option>
+              <option value="C">C. E01 supports embedded metadata, hashes, and optional compression within a single container.</option>
+              <option value="D">D. E01 can only be opened by law enforcement, increasing secrecy.</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q10 &middot; Chain of custody</div>
+            <div class="question-text">
+              Which action most clearly <strong>breaks</strong> the chain of custody for a seized laptop?
+            </div>
+            <select id="q10" name="q10" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. Transferring the laptop to another examiner without recording the transfer time and signatures.</option>
+              <option value="B">B. Placing the laptop in a tamper-evident evidence bag.</option>
+              <option value="C">C. Labelling the evidence bag with case number and item ID.</option>
+              <option value="D">D. Storing the laptop in a locked evidence room with access logs.</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q11 &middot; ACPO / forensic principles</div>
+            <div class="question-text">
+              Why should an examiner <strong>never perform analysis</strong> directly on original evidence media, if it can be avoided?
+            </div>
+            <select id="q11" name="q11" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. Forensic tools cannot read original disks.</option>
+              <option value="B">B. To comply with principles such as ACPO Principle 1: no action should change data that may later be relied upon in court.</option>
+              <option value="C">C. Because copies are always faster to image than originals.</option>
+              <option value="D">D. To avoid filling out chain-of-custody forms.</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q12 &middot; CSF Detect Function</div>
+            <div class="question-text">
+              Analysts in a SOC correlate SIEM alerts, EDR telemetry, and network logs to confirm that lateral movement is occurring. Which CSF Function does this activity fall under <strong>primarily</strong>?
+            </div>
+            <select id="q12" name="q12" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. Identify (ID)</option>
+              <option value="B">B. Detect (DE)</option>
+              <option value="C">C. Respond (RS)</option>
+              <option value="D">D. Recover (RC)</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q13 &middot; Hash verification</div>
+            <div class="question-text">
+              In FTK Imager, enabling <em>&ldquo;Verify images after they are created&rdquo;</em> primarily ensures what?
+            </div>
+            <select id="q13" name="q13" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. The imaging process completes faster.</option>
+              <option value="B">B. The image is compressed as much as possible.</option>
+              <option value="C">C. Only logical files are captured, not unallocated space.</option>
+              <option value="D">D. Source and image hashes are compared to confirm integrity of the acquired image.</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q14 &middot; Triage acquisition</div>
+            <div class="question-text">
+              During an active campaign affecting 300 endpoints, the incident team needs rapid <strong>triage</strong> to understand scope. Which acquisition strategy best balances speed and evidentiary value?
+            </div>
+            <select id="q14" name="q14" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. Full physical images of every endpoint before any analysis.</option>
+              <option value="B">B. Sparse / targeted remote acquisition of key artefacts (e.g. browser history, registry keys, event logs) using an agent.</option>
+              <option value="C">C. Manually taking screenshots of user desktops.</option>
+              <option value="D">D. Only collecting nightly backup images from the file server.</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q15 &middot; Data breach vs incident</div>
+            <div class="question-text">
+              Which option best describes a <strong>data breach</strong> within the broader set of cybersecurity incidents?
+            </div>
+            <select id="q15" name="q15" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. Any malware infection, regardless of data exposure.</option>
+              <option value="B">B. Any failed login attempt from an external IP.</option>
+              <option value="C">C. An incident involving unauthorised access to sensitive or confidential data, potentially leading to exposure or theft.</option>
+              <option value="D">D. A planned penetration test approved by management.</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q16 &middot; Dead acquisition</div>
+            <div class="question-text">
+              Which statement about <strong>dead (post-mortem) acquisition</strong> is most accurate?
+            </div>
+            <select id="q16" name="q16" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. It captures volatile memory such as RAM and active processes.</option>
+              <option value="B">B. It is preferred when encryption keys in RAM are required.</option>
+              <option value="C">C. It is forensically strong because the device is powered off and write-blockers can prevent changes to the evidence media.</option>
+              <option value="D">D. It cannot be used on storage larger than 2 TB.</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q17 &middot; Remote acquisition</div>
+            <div class="question-text">
+              In a corporate DFIR scenario, which statement about <strong>remote acquisition</strong> is most correct?
+            </div>
+            <select id="q17" name="q17" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. It should never be used because chain of custody cannot be preserved.</option>
+              <option value="B">B. It allows acquisition from geographically dispersed endpoints over the network while preserving logs and hashes if correctly implemented.</option>
+              <option value="C">C. It always collects a full physical disk image automatically.</option>
+              <option value="D">D. It is only legal for law enforcement agencies.</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q18 &middot; Respond vs Recover</div>
+            <div class="question-text">
+              Which action is an example of the CSF <strong>Respond (RS)</strong> Function rather than Recover (RC)?
+            </div>
+            <select id="q18" name="q18" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. Restoring a clean database from replica servers.</option>
+              <option value="B">B. Updating the business continuity plan after an incident.</option>
+              <option value="C">C. Blocking malicious IP addresses and isolating compromised hosts from the network.</option>
+              <option value="D">D. Rebuilding a data centre after a fire.</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q19 &middot; Risk responses</div>
+            <div class="question-text">
+              Which scenario best illustrates a <strong>risk transfer</strong> decision in cybersecurity risk management?
+            </div>
+            <select id="q19" name="q19" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. Deploying EDR and hardening servers.</option>
+              <option value="B">B. Purchasing cyber insurance to offset financial impact of future incidents.</option>
+              <option value="C">C. Accepting the risk of legacy systems without changes.</option>
+              <option value="D">D. Patching all internet-facing systems.</option>
+            </select>
+          </li>
+
+          <li>
+            <div class="question-meta">Q20 &middot; IR plan &amp; Governance</div>
+            <div class="question-text">
+              An organisation wants its Incident Response Plan to align with CSF 2.0 and integrate into enterprise risk management. Which element is <strong>most critical</strong> to achieve this?
+            </div>
+            <select id="q20" name="q20" required>
+              <option value="">-- Select your answer --</option>
+              <option value="A">A. A detailed list of every detection rule in the SIEM.</option>
+              <option value="B">B. A strong Govern (GV) Function with defined risk management strategy, roles, and oversight integrated with IR.</option>
+              <option value="C">C. Backup runbooks stored locally on one analyst’s laptop.</option>
+              <option value="D">D. A list of every forensic tool installed in the lab.</option>
+            </select>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Written Section -->
+      <section id="written" class="card">
+        <h2 class="section-title">Section B &mdash; Written Questions (5 questions)</h2>
+        <p class="muted">
+          Answer in 5–10 focused sentences per question. Refer to DFIR terminology, NIST SP 800-61r3, CSF 2.0, acquisition methods, and chain-of-custody where appropriate.
+        </p>
+
+        <ol start="21">
+          <li>
+            <div class="question-meta">Q21 &middot; End-to-end incident handling</div>
+            <div class="question-text">
+              A trusted insider has exfiltrated sensitive customer data via a cloud storage service. Describe the <strong>end-to-end DFIR approach</strong> from detection to lessons learned, mapping your steps to relevant CSF 2.0 Functions (GV/ID/PR/DE/RS/RC) and NIST SP 800-61r3 life-cycle concepts.
+            </div>
+            <textarea id="w1" name="w1" placeholder="Write your structured response here..."></textarea>
+          </li>
+
+          <li>
+            <div class="question-meta">Q22 &middot; Chain of custody scenario</div>
+            <div class="question-text">
+              Based on standard evidence handling practices, outline how you would complete a <strong>Chain of Custody form</strong> for a seized laptop that moves from: (1) first responder at the crime scene, to (2) evidence storage, to (3) forensic lab for imaging, and finally (4) destruction on a judge’s order. Include the types of information and signatures recorded at each step.
+            </div>
+            <textarea id="w2" name="w2" placeholder="Describe your chain of custody entries and rationale..."></textarea>
+          </li>
+
+          <li>
+            <div class="question-meta">Q23 &middot; Comparing acquisition methods</div>
+            <div class="question-text">
+              Compare <strong>dead, live, physical, logical, sparse, targeted, remote, and cloud acquisition</strong>. For at least three realistic enterprise scenarios, justify which method(s) you would choose and why, considering volatility, encryption, business impact, and legal defensibility.
+            </div>
+            <textarea id="w3" name="w3" placeholder="Compare methods and map them to concrete scenarios..."></textarea>
+          </li>
+
+          <li>
+            <div class="question-meta">Q24 &middot; IR communications</div>
+            <div class="question-text">
+              A regional hospital suffers a ransomware attack that disrupts patient scheduling but not life-critical systems. Draft a high-level <strong>incident communication plan</strong> covering internal stakeholders (execs, IT, SOC, legal, clinical units) and external parties (regulators, patients, media, suppliers). Show how timing, truthfulness, and regulatory obligations influence your messaging.
+            </div>
+            <textarea id="w4" name="w4" placeholder="Outline communication phases, audiences, and key messages..."></textarea>
+          </li>
+
+          <li>
+            <div class="question-meta">Q25 &middot; Forensically sound imaging</div>
+            <div class="question-text">
+              A USB drive suspected of leaking unreleased media content must be acquired using FTK Imager for potential court use. Describe, step by step, how you would ensure the acquisition is <strong>forensically sound</strong> and admissible: include preparation, write-blocking, image creation, hashing, verification, documentation, and how you would present this in your final report.
+            </div>
+            <textarea id="w5" name="w5" placeholder="Detail your acquisition and documentation workflow..."></textarea>
+          </li>
+        </ol>
+      </section>
+
+      <!-- Actions -->
+      <section class="card">
+        <h2 class="section-title">Submit &amp; Export</h2>
+        <p class="muted">
+          When you are satisfied with your answers, click <strong>Submit Exam &amp; Grade MCQs</strong>. Then export your work as a PDF for submission or record-keeping.
+        </p>
+        <div class="btn-row">
+          <button type="submit" class="btn-primary">
+            ✅ Submit Exam &amp; Grade MCQs
+          </button>
+          <button type="button" class="btn-secondary" onclick="window.print()">
+            📄 Save / Print as PDF
+          </button>
+        </div>
+
+        <div id="results" class="hidden">
+          <div class="results-header">
+            <div>
+              <div class="score-main">
+                MCQ Score: <span id="scoreValue">0%</span>
+              </div>
+              <div class="muted">
+                Raw score: <span id="rawScore">0 / 20</span>
+              </div>
+            </div>
+            <div id="gradeBadge" class="score-badge">
+              Grade band: <span id="gradeBand">–</span>
+            </div>
+          </div>
+
+          <div class="results-grid">
+            <div>
+              <div class="results-item-label">Student</div>
+              <div class="results-item-value" id="studentNameResult">–</div>
+            </div>
+            <div>
+              <div class="results-item-label">Student ID</div>
+              <div class="results-item-value" id="studentIdResult">–</div>
+            </div>
+            <div>
+              <div class="results-item-label">Class / Group</div>
+              <div class="results-item-value" id="studentClassResult">–</div>
+            </div>
+            <div>
+              <div class="results-item-label">Unanswered MCQs</div>
+              <div class="results-item-value" id="unansweredCount">0</div>
+            </div>
+          </div>
+
+          <div class="note-box">
+            <strong>Note:</strong> Section B (Written Questions)
+            <span class="pill">Manual marking</span>
+            is not auto-graded by this page. Lecturers should assign marks based on depth,
+            accuracy, mapping to NIST SP 800-61r3, CSF 2.0, acquisition correctness, and
+            quality of reasoning.
+          </div>
+        </div>
+      </section>
+    </form>
+  </div>
+
+  <script>
+    // Answer key for MCQs
+    const answerKey = {
+      q1: "C",
+      q2: "B",
+      q3: "B",
+      q4: "B",
+      q5: "C",
+      q6: "B",
+      q7: "C",
+      q8: "C",
+      q9: "C",
+      q10: "A",
+      q11: "B",
+      q12: "B",
+      q13: "D",
+      q14: "B",
+      q15: "C",
+      q16: "C",
+      q17: "B",
+      q18: "C",
+      q19: "B",
+      q20: "B"
+    };
+
+    function gradeExam(event) {
+      event.preventDefault();
+
+      let totalQuestions = 20;
+      let correct = 0;
+      let unanswered = 0;
+
+      // Clear previous styling
+      for (let i = 1; i <= totalQuestions; i++) {
+        const sel = document.getElementById("q" + i);
+        sel.classList.remove("correct", "incorrect", "unanswered");
+      }
+
+      // Mark answers
+      for (let i = 1; i <= totalQuestions; i++) {
+        const id = "q" + i;
+        const sel = document.getElementById(id);
+        const value = sel.value;
+
+        if (!value) {
+          unanswered++;
+          sel.classList.add("unanswered");
+          continue;
+        }
+
+        if (value === answerKey[id]) {
+          correct++;
+          sel.classList.add("correct");
+        } else {
+          sel.classList.add("incorrect");
+        }
+      }
+
+      const score = Math.round((correct / totalQuestions) * 100);
+      const rawText = correct + " / " + totalQuestions;
+
+      document.getElementById("scoreValue").textContent = score + "%";
+      document.getElementById("rawScore").textContent = rawText;
+      document.getElementById("unansweredCount").textContent = unanswered;
+
+      // Grade band
+      let band = "";
+      let badge = document.getElementById("gradeBadge");
+      badge.classList.remove("badge-success", "badge-warning", "badge-danger");
+
+      if (score >= 85) {
+        band = "Distinction";
+        badge.classList.add("badge-success");
+      } else if (score >= 70) {
+        band = "Merit";
+        badge.classList.add("badge-success");
+      } else if (score >= 50) {
+        band = "Pass";
+        badge.classList.add("badge-warning");
+      } else {
+        band = "Needs Improvement";
+        badge.classList.add("badge-danger");
+      }
+      document.getElementById("gradeBand").textContent = band;
+
+      // Populate student info summary
+      const name = document.getElementById("studentName").value || "Unnamed student";
+      const sid = document.getElementById("studentId").value || "N/A";
+      const sclass = document.getElementById("studentClass").value || "N/A";
+
+      document.getElementById("studentNameResult").textContent = name;
+      document.getElementById("studentIdResult").textContent = sid;
+      document.getElementById("studentClassResult").textContent = sclass;
+
+      // Reveal results block
+      document.getElementById("results").classList.remove("hidden");
+
+      // Light validation: warn if key student fields are empty
+      if (!document.getElementById("studentName").value ||
+          !document.getElementById("studentId").value ||
+          !document.getElementById("studentEmail").value) {
+        alert(
+          "MCQs graded. Please ensure your student details (name, ID, email) are completed before saving the PDF."
+        );
+      }
+    }
+  </script>
+</body>
+</html>
