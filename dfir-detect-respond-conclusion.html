@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>DFIR – Detect & Respond Conclusion Companion</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    :root {
+      --maroon: #8b0033;
+      --maroon-dark: #5b0222;
+      --bg: #f5f6fb;
+      --card-bg: #ffffff;
+      --border: #d4d7e3;
+      --text-main: #222433;
+      --text-muted: #555b72;
+      --accent: #0057d9;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text-main);
+    }
+
+    /* Top strip mimicking slide style */
+    .top-strip {
+      height: 10px;
+      background: var(--maroon);
+    }
+
+    header {
+      background: #ffffff;
+      padding: 18px 16px 12px;
+      border-bottom: 1px solid #e0e1ea;
+    }
+
+    header h1 {
+      margin: 0 0 6px;
+      font-size: 1.8rem;
+    }
+
+    header p {
+      margin: 0;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    main {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 20px 16px 40px;
+    }
+
+    .intro {
+      background: var(--card-bg);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 16px 18px;
+      margin-bottom: 20px;
+    }
+
+    .intro strong {
+      font-weight: 600;
+    }
+
+    h2.section-title {
+      margin-top: 26px;
+      font-size: 1.4rem;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    h2.section-title span.emoji {
+      font-size: 1.5rem;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 18px;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      padding: 16px 18px 18px;
+      box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+    }
+
+    .card h3 {
+      margin-top: 0;
+      margin-bottom: 4px;
+      font-size: 1.15rem;
+    }
+
+    .badge-row {
+      margin: 4px 0 8px;
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 2px 8px;
+      margin: 0 6px 4px 0;
+      border-radius: 999px;
+      font-size: 0.75rem;
+      background: #eef2ff;
+      color: #3730a3;
+      border: 1px solid #c7d2fe;
+    }
+
+    p {
+      line-height: 1.5;
+      font-size: 0.95rem;
+    }
+
+    ul {
+      padding-left: 20px;
+      margin-top: 6px;
+      margin-bottom: 10px;
+      font-size: 0.95rem;
+    }
+
+    .links {
+      margin-top: 6px;
+      font-size: 0.9rem;
+    }
+
+    .links a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .links a:hover {
+      text-decoration: underline;
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 6px;
+      font-size: 0.85rem;
+    }
+
+    .pill {
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid #cbd5f5;
+      background: #edf2ff;
+      color: #374151;
+    }
+
+    .diagram {
+      border-radius: 8px;
+      border: 1px dashed #cbd0e2;
+      background: linear-gradient(135deg, #f9fafb, #eef2ff);
+      padding: 10px 12px;
+      font-size: 0.85rem;
+      margin-top: 10px;
+    }
+
+    .diagram pre {
+      margin: 0;
+      font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.8rem;
+      white-space: pre;
+    }
+
+    .case-study {
+      background: #f9fafb;
+      border-radius: 8px;
+      border: 1px solid #e0e1ea;
+      padding: 10px 12px;
+      font-size: 0.88rem;
+      margin-top: 10px;
+    }
+
+    .case-study strong {
+      color: var(--maroon-dark);
+      font-weight: 600;
+    }
+
+    .media-list {
+      font-size: 0.88rem;
+      margin-top: 6px;
+    }
+
+    .media-list li {
+      margin-bottom: 2px;
+    }
+
+    .reference-list {
+      font-size: 0.88rem;
+      line-height: 1.5;
+    }
+
+    .reference-list li {
+      margin-bottom: 4px;
+    }
+
+    .quote {
+      margin-top: 24px;
+      padding: 12px 14px;
+      border-left: 4px solid var(--maroon);
+      background: #fff7fb;
+      font-size: 0.95rem;
+      font-style: italic;
+    }
+
+    footer {
+      margin-top: 26px;
+      padding-top: 10px;
+      border-top: 1px solid #e0e1ea;
+      font-size: 0.8rem;
+      color: var(--text-muted);
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<div class="top-strip"></div>
+
+<header>
+  <h1>DFIR – Detect & Respond: Lesson Conclusion Companion</h1>
+  <p>
+    Deep-dive expansion of the conclusion slide: Detect Function, Incident Triage, Evidence Collection,
+    Respond Function, and Validation Methods, backed by standards, case studies, and examples.
+  </p>
+</header>
+
+<main>
+
+  <section class="intro">
+    <p>
+      In this lesson you reviewed how DFIR teams <strong>detect</strong> incidents, <strong>triage</strong> them by impact,
+      <strong>collect and preserve evidence</strong>, <strong>respond</strong> to contain and eradicate threats, and
+      <strong>validate</strong> that what you’re seeing is a real incident and not noise.
+    </p>
+    <p>
+      This page turns those closing bullet points into a mini reference hub you can return to during labs,
+      incident simulations, and exams.
+    </p>
+  </section>
+
+  <!-- 1. DETECT FUNCTION -->
+  <h2 class="section-title"><span class="emoji">🔍</span> Detect Function – SIEM, EDR, IDS/IPS</h2>
+
+  <div class="grid">
+    <article class="card">
+      <h3>What “Detect” Really Means</h3>
+      <div class="badge-row">
+        <span class="badge">NIST IR – Detection & Analysis</span>
+        <span class="badge">SOC Monitoring</span>
+      </div>
+      <p>
+        The Detect function is about turning raw telemetry into <strong>actionable security alerts</strong>.
+        It uses log collection, endpoint sensors, and network monitoring to spot suspicious behavior before
+        it becomes a full-blown incident.
+      </p>
+      <ul>
+        <li><strong>SIEM</strong> – Aggregates & correlates logs from across the environment (auth, firewall, cloud, apps).</li>
+        <li><strong>EDR / XDR</strong> – Monitors processes, memory, and behavior on endpoints/servers.</li>
+        <li><strong>IDS/IPS</strong> – Watches network traffic for malicious signatures or anomalies.</li>
+      </ul>
+      <div class="pill-list">
+        <span class="pill">Log aggregation</span>
+        <span class="pill">Alert correlation</span>
+        <span class="pill">Threat intelligence</span>
+        <span class="pill">Behavior analytics</span>
+      </div>
+      <div class="diagram">
+        <strong>Detect Pipeline (Simplified)</strong>
+        <pre>
+[Endpoints / Network / Cloud]
+            │
+            ▼
+        SIEM / XDR
+  (normalize + correlate)
+            │
+            ▼
+   Alerts & Dashboards
+        </pre>
+      </div>
+    </article>
+
+    <article class="card">
+      <h3>Learn More & Explore</h3>
+      <p class="links">
+        ▸ NIST SP 800-61 Rev.3 – Incident Response Recommendations and Considerations  
+        <br>
+        <a href="https://csrc.nist.gov/pubs/sp/800/61/r3/final" target="_blank">
+          https://csrc.nist.gov/pubs/sp/800/61/r3/final
+        </a>
+      </p>
+      <p class="links">
+        ▸ SIEM vs IDS, and using them together  
+        <br>
+        <a href="https://www.exabeam.com/explainers/siem/siem-vs-ids-key-differences-and-using-them-together/" target="_blank">
+          Exabeam – SIEM vs IDS
+        </a>
+      </p>
+      <p class="links">
+        ▸ SOC core tools overview (EDR, IDS, IPS, SOAR)  
+        <br>
+        <a href="https://medium.com/infosec-ninja/day-8-edr-ids-ips-and-soar-core-soc-tools-overview-b9ad87ed7995" target="_blank">
+          “Day 8: EDR, IDS, IPS, and SOAR – Core SOC Tools”
+        </a>
+      </p>
+
+      <h4>Media & Labs (Ideas)</h4>
+      <ul class="media-list">
+        <li>Run a <strong>SIEM detection lab</strong>: send Windows security logs to a cloud SIEM and trigger a failed logon brute-force.</li>
+        <li>Compare alerts from an <strong>IDS</strong> (e.g., Suricata) vs. an <strong>EDR</strong> after a simple malware test file (EICAR) is executed.</li>
+      </ul>
+
+      <div class="case-study">
+        <strong>Case Study – Target Breach (2013)</strong><br>
+        Target’s environment generated alerts, but they were not acted on quickly. This breach is often
+        cited as an example of where <em>Detect</em> technically worked, but triage/response failed.  
+        <br>
+        Read summaries:  
+        <a href="https://www.breachsense.com/blog/target-data-breach/" target="_blank">
+          BreachSense – Target data breach explained
+        </a><br>
+        <a href="https://frameworksecurity.com/post/the-target-breach-a-historic-cyberattack-with-lasting-consequences" target="_blank">
+          Framework Security – Historic Target breach
+        </a>
+      </div>
+    </article>
+  </div>
+
+  <!-- 2. INCIDENT TRIAGE -->
+  <h2 class="section-title"><span class="emoji">🚦</span> Incident Triage – Severity, Volatility, Impact</h2>
+
+  <div class="grid">
+    <article class="card">
+      <h3>From “Alert” to “Incident”</h3>
+      <div class="badge-row">
+        <span class="badge">Prioritisation</span>
+        <span class="badge">NIST CSF – Detect</span>
+      </div>
+      <p>
+        Incident triage is the process of rapidly deciding <strong>what to do first</strong>. Not every alert
+        deserves the same attention. Triage looks at:
+      </p>
+      <ul>
+        <li><strong>Severity</strong> – What is the potential business impact if this is real?</li>
+        <li><strong>Evidence volatility</strong> – What data will disappear soon (memory, network flows)?</li>
+        <li><strong>Scope</strong> – How many users, systems, or data sets are affected?</li>
+      </ul>
+      <div class="diagram">
+        <strong>Simple Triage Decision Matrix</strong>
+        <pre>
+              Impact
+              Low    Medium   High
+Urgency  ┌─────────────────────────┐
+  Low    │   Minor   Minor   Major │
+  High   │   Major   Major Critical│
+        └─────────────────────────┘
+        </pre>
+      </div>
+    </article>
+
+    <article class="card">
+      <h3>References & Case Studies</h3>
+      <p class="links">
+        ▸ NIST Incident Response Lifecycle (Detection & Analysis phase)  
+        <br>
+        <a href="https://auditboard.com/blog/nist-incident-response" target="_blank">
+          AuditBoard – NIST IR cycle overview
+        </a>
+      </p>
+      <p class="links">
+        ▸ ICS incident response summaries (high-impact, high-criticality triage examples)  
+        <br>
+        <a href="https://www.cisa.gov/sites/default/files/documents/ICS-CERT%20Incident%20Response%20Summary%20Report%20%282009-2011%29_S508C.pdf" target="_blank">
+          CISA ICS-CERT incident response summary
+        </a>
+      </p>
+
+      <div class="case-study">
+        <strong>Case Study – Stuxnet</strong><br>
+        Stuxnet targeted industrial control systems used in uranium enrichment. Triage was difficult because
+        early activity looked like normal ICS noise until the physical impact became visible.  
+        <br>
+        See an overview:  
+        <a href="https://www.sciencedirect.com/topics/computer-science/stuxnet" target="_blank">
+          Stuxnet overview (ScienceDirect)
+        </a>
+      </div>
+
+      <h4>Exercises</h4>
+      <ul class="media-list">
+        <li>Give students five alert descriptions and ask them to rank: <em>Critical / Major / Minor</em> with justification.</li>
+        <li>Link triage decisions to which log sources or memory captures must be acquired first (evidence volatility).</li>
+      </ul>
+    </article>
+  </div>
+
+  <!-- 3. EVIDENCE COLLECTION -->
+  <h2 class="section-title"><span class="emoji">📦</span> Evidence Collection – Photography, Labeling, Chain of Custody</h2>
+
+  <div class="grid">
+    <article class="card">
+      <h3>Doing Forensics the Right Way</h3>
+      <div class="badge-row">
+        <span class="badge">NIST SP 800-86</span>
+        <span class="badge">Integrity & Chain of Custody</span>
+      </div>
+      <p>
+        Evidence collection is more than “grabbing a disk image”. It includes:
+      </p>
+      <ul>
+        <li><strong>Documentation & labeling</strong> – Who collected what, where, when, and how.</li>
+        <li><strong>Photography</strong> – Physical scene, cable layout, device labels, serial numbers.</li>
+        <li><strong>Forensic acquisition</strong> – Using trusted tools to capture bit-level copies or logical exports.</li>
+        <li><strong>Chain of custody</strong> – Documenting every handoff so evidence remains admissible.</li>
+      </ul>
+      <p>
+        NIST SP 800-86 describes the forensics phases: <em>Collection → Examination → Analysis → Reporting</em>,
+        with strong emphasis on preserving integrity.
+      </p>
+      <div class="diagram">
+        <strong>Evidence Flow</strong>
+        <pre>
+[Live System] → [Acquisition] → [Verified Image + Hashes]
+         ↓
+    Chain of Custody Log
+        </pre>
+      </div>
+    </article>
+
+    <article class="card">
+      <h3>Guides & Proof-of-Concepts</h3>
+      <p class="links">
+        ▸ NIST SP 800-86 – Guide to Integrating Forensic Techniques into Incident Response  
+        <br>
+        <a href="https://csrc.nist.gov/pubs/sp/800/86/final" target="_blank">
+          https://csrc.nist.gov/pubs/sp/800/86/final
+        </a>
+      </p>
+      <p class="links">
+        ▸ Overview of digital evidence handling & best practices  
+        <br>
+        <a href="https://cyooda.com/blog/digital-forensics-a-comprehensive-guide-to-investigation-recovery-and-analysis" target="_blank">
+          Digital Forensics – Comprehensive Guide
+        </a>
+      </p>
+
+      <h4>Lab / PoC Ideas</h4>
+      <ul class="media-list">
+        <li>Students complete a <strong>Chain of Custody form</strong> for a seized laptop and USB drive.</li>
+        <li>Use tools like <strong>FTK Imager</strong> or your Python-based “PyForensics Studio” to acquire an image
+            and generate MD5/SHA-256 hashes.</li>
+        <li>Compare original vs. image hashes to demonstrate integrity preservation.</li>
+      </ul>
+    </article>
+  </div>
+
+  <!-- 4. RESPOND FUNCTION -->
+  <h2 class="section-title"><span class="emoji">🛡️</span> Respond Function – Containment, Mitigation, Communication</h2>
+
+  <div class="grid">
+    <article class="card">
+      <h3>From Detection to Action</h3>
+      <div class="badge-row">
+        <span class="badge">Containment</span>
+        <span class="badge">Eradication</span>
+        <span class="badge">Recovery</span>
+      </div>
+      <p>
+        The Respond function covers the actions taken once an incident is confirmed:
+      </p>
+      <ul>
+        <li><strong>Containment</strong> – Stop lateral movement and damage (isolate hosts, block accounts, segment networks).</li>
+        <li><strong>Eradication</strong> – Remove malware, backdoors, or misconfigurations.</li>
+        <li><strong>Recovery</strong> – Restore systems and data, monitor for reinfection.</li>
+        <li><strong>Communication</strong> – Coordinate with leadership, legal, PR, and affected stakeholders.</li>
+      </ul>
+      <p>
+        NIST’s incident response lifecycle frames this as <em>Detection & Analysis → Containment, Eradication,
+        and Recovery → Post-incident Activity</em>.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>References & Examples</h3>
+      <p class="links">
+        ▸ NIST SP 800-61 Rev.3 – modern IR guidance, aligned with NIST CSF 2.0  
+        <br>
+        <a href="https://csrc.nist.gov/pubs/sp/800/61/r3/final" target="_blank">
+          NIST Incident Response Recommendations
+        </a>
+      </p>
+      <p class="links">
+        ▸ NIST SP 800-184 – Guide for Cybersecurity Event Recovery  
+        <br>
+        <a href="https://doi.org/10.6028/NIST.SP.800-184" target="_blank">
+          NIST SP 800-184 (Recovery)
+        </a>
+      </p>
+
+      <div class="case-study">
+        <strong>Case Study – Target (Response Timeline)</strong><br>
+        Target was informed of the breach by a third party, then moved to remove malware and notify
+        customers. The case highlights the importance of <em>early containment</em> and <em>clear communication</em>.  
+        <br>
+        See a concise timeline:  
+        <a href="https://www.breachsense.com/blog/target-data-breach/" target="_blank">
+          BreachSense – Timeline & Lessons
+        </a>
+      </div>
+
+      <h4>PoC / Tabletop Idea</h4>
+      <ul class="media-list">
+        <li>Run a <strong>tabletop exercise</strong> for a ransomware alert: decide which hosts to isolate,
+            when to pull network cables, and how to brief management.</li>
+      </ul>
+    </article>
+  </div>
+
+  <!-- 5. VALIDATION METHODS -->
+  <h2 class="section-title"><span class="emoji">✅</span> Validation Methods – Separating False Positives from Real Threats</h2>
+
+  <div class="grid">
+    <article class="card">
+      <h3>Trust but Verify</h3>
+      <div class="badge-row">
+        <span class="badge">Alert Validation</span>
+        <span class="badge">Detection Tuning</span>
+      </div>
+      <p>
+        Validation is where you prove that an alert is a <strong>true incident</strong> (or safely dismiss it)
+        using additional data:
+      </p>
+      <ul>
+        <li><strong>Cross-checking sources</strong> – SIEM alert + EDR telemetry + firewall logs.</li>
+        <li><strong>Context</strong> – Is this behavior normal for this user/host at this time?</li>
+        <li><strong>Threat intelligence</strong> – Does the IP/hash/domain appear in threat feeds?</li>
+        <li><strong>Reproducibility</strong> – Can you replay the query or test the rule on historical data?</li>
+      </ul>
+      <p>
+        Effective validation reduces alert fatigue by cutting false positives, while tuning detections
+        reduces false negatives.
+      </p>
+    </article>
+
+    <article class="card">
+      <h3>Useful References & Exercises</h3>
+      <p class="links">
+        ▸ NIST SP 800-92r1 (Log Management Planning – draft)  
+        <br>
+        <a href="https://doi.org/10.6028/NIST.SP.800-92r1.ipd" target="_blank">
+          NIST – Cybersecurity Log Management Planning
+        </a>
+      </p>
+      <p class="links">
+        ▸ UpGuard – SIEM vs IDS and alerting discussion  
+        <br>
+        <a href="https://www.upguard.com/blog/siem-vs-ids" target="_blank">
+          “SIEM vs IDS: What is the Difference?”
+        </a>
+      </p>
+
+      <h4>Hands-On Validation Ideas</h4>
+      <ul class="media-list">
+        <li>Give students a SIEM export with 20 alerts and ask them to mark each as
+            <em>true positive / false positive / needs more data</em>.</li>
+        <li>Use known “good” admin scripts to test if EDR rules are too aggressive (leading to benign alerts).</li>
+        <li>Compare a malware hash against public threat feeds (VirusTotal, etc.) to validate suspicion.</li>
+      </ul>
+    </article>
+  </div>
+
+  <!-- References -->
+  <h2 class="section-title"><span class="emoji">📚</span> References & Further Reading</h2>
+
+  <div class="card">
+    <ul class="reference-list">
+      <li>NIST SP 800-61 Rev.3 – <a href="https://csrc.nist.gov/pubs/sp/800/61/r3/final" target="_blank">
+        Incident Response Recommendations and Considerations</a></li>
+      <li>NIST SP 800-86 – <a href="https://csrc.nist.gov/pubs/sp/800/86/final" target="_blank">
+        Guide to Integrating Forensic Techniques into Incident Response</a></li>
+      <li>NIST SP 800-184 – <a href="https://doi.org/10.6028/NIST.SP.800-184" target="_blank">
+        Guide for Cybersecurity Event Recovery</a></li>
+      <li>Exabeam – <a href="https://www.exabeam.com/explainers/siem/siem-vs-ids-key-differences-and-using-them-together/" target="_blank">
+        SIEM vs IDS: Key Differences & Using Them Together</a></li>
+      <li>BreachSense – <a href="https://www.breachsense.com/blog/target-data-breach/" target="_blank">
+        Target Data Breach Explained: A Case Study</a></li>
+      <li>ScienceDirect Topic – <a href="https://www.sciencedirect.com/topics/computer-science/stuxnet" target="_blank">
+        Stuxnet overview</a></li>
+      <li>AuditBoard – <a href="https://auditboard.com/blog/nist-incident-response" target="_blank">
+        NIST Incident Response Lifecycle Overview</a></li>
+      <li>Digital Forensics overview – <a href="https://cyooda.com/blog/digital-forensics-a-comprehensive-guide-to-investigation-recovery-and-analysis" target="_blank">
+        Digital Forensics: Comprehensive Guide</a></li>
+    </ul>
+  </div>
+
+  <div class="quote">
+    “Detect fast, triage smart, collect clean, respond decisively, and validate ruthlessly –
+    that’s the DFIR loop you are training for.”
+  </div>
+
+  <footer>
+    DFIR Detect & Respond – Conclusion Companion • Built for DFIR301 learners
+  </footer>
+
+</main>
+
+</body>
+</html>
