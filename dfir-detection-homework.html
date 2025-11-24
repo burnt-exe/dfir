@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>DFIR301 – Homework 04.01: Detection Monitoring Plan</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+    body {
+        background: #0d1b2a;
+        color: #e0e6f0;
+        margin: 0;
+        padding: 0;
+        font-family: Arial, sans-serif;
+    }
+    header {
+        background: #1b263b;
+        padding: 25px;
+        text-align: center;
+        font-size: 1.9rem;
+        font-weight: bold;
+        border-bottom: 3px solid #415a77;
+    }
+    .container {
+        max-width: 960px;
+        margin: auto;
+        padding: 20px;
+    }
+    .card {
+        background: #1b263b;
+        padding: 20px;
+        border-radius: 10px;
+        margin-bottom: 25px;
+        border: 1px solid #415a77;
+    }
+    h2 {
+        color: #9db4ff;
+        margin-top: 0;
+    }
+    h3 {
+        color: #c7d7ff;
+        margin-top: 18px;
+    }
+    p {
+        line-height: 1.5;
+    }
+    .btn {
+        display: inline-block;
+        padding: 12px 18px;
+        background: #415a77;
+        color: #fff;
+        border-radius: 6px;
+        text-decoration: none;
+        margin-top: 10px;
+        transition: 0.2s;
+    }
+    .btn:hover {
+        background: #6b8bb9;
+    }
+    textarea {
+        width: 100%;
+        min-height: 180px;
+        padding: 10px;
+        border-radius: 6px;
+        border: 1px solid #415a77;
+        background: #142236;
+        color: #e0e6f0;
+        resize: vertical;
+        font-size: 0.95rem;
+    }
+    .sample {
+        background: #102030;
+        padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #415a77;
+        margin-top: 10px;
+        font-size: 0.95rem;
+        white-space: pre-line;
+    }
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 15px;
+        font-size: 0.95rem;
+    }
+    th, td {
+        border: 1px solid #415a77;
+        padding: 10px;
+        vertical-align: top;
+    }
+    th {
+        background: #24344d;
+    }
+    footer {
+        text-align: center;
+        padding: 20px;
+        color: #8da4c7;
+        margin-top: 30px;
+    }
+    .accordion {
+        background: #24344d;
+        padding: 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        margin-bottom: 8px;
+        border: 1px solid #415a77;
+        transition: 0.3s;
+    }
+    .accordion:hover {
+        background: #2f4563;
+    }
+    .panel {
+        display: none;
+        padding: 10px 15px;
+        border-left: 3px solid #415a77;
+        background: #142236;
+        border-radius: 6px;
+        margin-bottom: 10px;
+    }
+    .two-col {
+        display: grid;
+        grid-template-columns: repeat(auto-fit,minmax(260px,1fr));
+        gap: 15px;
+    }
+    .pill {
+        display: inline-block;
+        padding: 4px 10px;
+        border-radius: 999px;
+        border: 1px solid #415a77;
+        font-size: 0.8rem;
+        margin-right: 6px;
+        margin-bottom: 4px;
+        background: #102239;
+        color: #cdd7ff;
+    }
+    .quote-ar {
+        font-size: 1.3rem;
+        text-align: center;
+        direction: rtl;
+        margin-bottom: 8px;
+        color: #f1f3ff;
+    }
+    .quote-en {
+        font-size: 0.95rem;
+        text-align: center;
+        color: #9fb4ff;
+    }
+</style>
+
+<script>
+    function togglePanel(id) {
+        var panel = document.getElementById(id);
+        panel.style.display = panel.style.display === "block" ? "none" : "block";
+    }
+</script>
+</head>
+
+<body>
+
+<header>DFIR301 – Homework 04.01: Detection Monitoring Plan</header>
+
+<div class="container">
+
+<!-- ASSIGNMENT BRIEF -->
+<div class="card">
+    <h2>📘 Homework Objective</h2>
+    <p>
+        In this homework you will design a <b>detection and monitoring plan</b> for a fictional company 
+        with around 50 employees. The goal is to demonstrate that you understand:
+    </p>
+    <ul>
+        <li>Which systems and logs are important to monitor</li>
+        <li>Which tools (SIEM, EDR, IDS/IPS, cloud logs) you would choose and why</li>
+        <li>How you would reduce <b>false positives</b> and <b>false negatives</b> in detection</li>
+        <li>How this aligns with <b>NIST</b> and DFIR best practices</li>
+    </ul>
+
+    <a class="btn" href="Homework 04.01 - DFIR Detection Monitoring Plan.docx" download>
+        📄 Download the Homework Template (DOCX)
+    </a>
+</div>
+
+<!-- COMPLETION GUIDE (MORE DETAILED) -->
+<div class="card">
+    <h2>🧭 Step-by-Step Completion Guide</h2>
+    <p>Use these sections as a thinking framework before you write your final 200-word answer.</p>
+
+    <div class="accordion" onclick="togglePanel('p1')">1️⃣ Define the Environment You Are Protecting</div>
+    <div class="panel" id="p1">
+        <p>Imagine a small company with:</p>
+        <ul>
+            <li>~50 users with laptops or desktops (Windows or mixed OS)</li>
+            <li>1–2 file/application servers</li>
+            <li>Cloud email (e.g., Microsoft 365 / Google Workspace)</li>
+            <li>VPN for remote users</li>
+            <li>Internet firewall / router</li>
+        </ul>
+        <p>
+            Write 2–3 sentences describing this environment as if you are explaining it to your CISO or manager.
+        </p>
+    </div>
+
+    <div class="accordion" onclick="togglePanel('p2')">2️⃣ Identify Critical Logs & Data Sources</div>
+    <div class="panel" id="p2">
+        <div class="two-col">
+            <div>
+                <h3>Core Log Sources</h3>
+                <ul>
+                    <li>Endpoint security logs (EDR/AV)</li>
+                    <li>Windows Security & Sysmon logs</li>
+                    <li>Firewall and VPN logs</li>
+                    <li>Cloud identity & sign-in logs</li>
+                    <li>Email security logs (phishing, spam, malware)</li>
+                </ul>
+            </div>
+            <div>
+                <h3>Think in Questions</h3>
+                <p>Ask yourself:</p>
+                <ul>
+                    <li>How would I spot stolen credentials?</li>
+                    <li>How would I see malware execution?</li>
+                    <li>How would I detect data exfiltration?</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="accordion" onclick="togglePanel('p3')">3️⃣ Choose Your Detection Tools</div>
+    <div class="panel" id="p3">
+        <p>Pick at least one from each category and mention them by type (not necessarily by brand):</p>
+        <span class="pill">SIEM</span>
+        <span class="pill">EDR/XDR</span>
+        <span class="pill">IDS/IPS</span>
+        <span class="pill">Email Security</span>
+        <span class="pill">Cloud-native Logs</span>
+        <ul>
+            <li><b>SIEM</b> – Central log collection + correlation (e.g., Sentinel, Splunk, QRadar).</li>
+            <li><b>EDR/XDR</b> – Endpoint behavior & process monitoring (e.g., Defender, CrowdStrike).</li>
+            <li><b>IDS/IPS</b> – Network signatures & anomaly detection (e.g., Suricata, Palo Alto).</li>
+        </ul>
+    </div>
+
+    <div class="accordion" onclick="togglePanel('p4')">4️⃣ Reducing False Positives & False Negatives</div>
+    <div class="panel" id="p4">
+        <h3>False Positives (Too Many Alerts)</h3>
+        <ul>
+            <li>Tune noisy rules and disable obviously redundant alerts.</li>
+            <li>Create allowlists for known trusted applications and IPs.</li>
+            <li>Use correlation rules (multiple signals ≫ single noisy signal).</li>
+        </ul>
+
+        <h3>False Negatives (Missed Attacks)</h3>
+        <ul>
+            <li>Ensure all critical assets are sending logs (no blind spots).</li>
+            <li>Update detection rules regularly and use threat intelligence feeds.</li>
+            <li>Monitor behaviors, not just known signatures.</li>
+        </ul>
+    </div>
+
+    <div class="accordion" onclick="togglePanel('p5')">5️⃣ Link Your Plan to NIST / DFIR Best Practice</div>
+    <div class="panel" id="p5">
+        <p>Mention that your monitoring plan supports:</p>
+        <ul>
+            <li><b>NIST SP 800-61</b> – Incident Handling (Detect & Analyze phase).</li>
+            <li><b>NIST SP 800-137</b> – Information Security Continuous Monitoring (ISCM).</li>
+        </ul>
+        <p>One sentence like this is enough in your answer:</p>
+        <div class="sample">
+“My detection and monitoring plan is aligned with NIST SP 800-61 and 800-137, ensuring that security events are continuously collected, correlated, and analyzed to support rapid incident detection and response.”
+        </div>
+    </div>
+</div>
+
+<!-- WORKSHEET AREA -->
+<div class="card">
+    <h2>📝 Your Homework Worksheet (Draft Space)</h2>
+    <p>
+        Use the box below to draft your ~200-word answer before you paste it into the DOCX homework file.
+        Try to touch on: <b>environment, logs, tools, FP/FN reduction, NIST alignment</b>.
+    </p>
+    <textarea placeholder="Write your structured answer here..."></textarea>
+</div>
+
+<!-- EXPANDED SAMPLE ANSWER -->
+<div class="card">
+    <h2>📄 Sample Answer (For Guidance Only – Do Not Copy Word for Word)</h2>
+    <div class="sample">
+For this company of around 50 employees, my detection and monitoring plan focuses on the most critical systems and identities. 
+I would monitor endpoint logs from all workstations and laptops, particularly EDR events and Windows Security logs, to detect malware, suspicious processes, and local privilege escalation. 
+At the network layer, I would collect firewall, VPN, and DNS logs to detect unusual outbound connections, lateral movement, and access from unexpected regions. 
+In the cloud, I would enable detailed audit and sign-in logs for our identity provider (e.g., Azure AD or Google Workspace) and email security platform to spot phishing, login anomalies, and risky mailbox rules.
+
+To analyze these signals, I would deploy a SIEM to aggregate logs from endpoints, network devices, and cloud services, and an EDR/XDR solution to provide real-time visibility and response on endpoints. 
+An IDS/IPS at the perimeter or in the cloud would add another layer of network-based detection.
+
+To reduce false positives, I would tune detection rules over time, whitelist known safe behavior, and use correlation across multiple data sources instead of reacting to single events in isolation. 
+To reduce false negatives, I would ensure full log coverage for all critical assets, keep signatures and analytics updated, and include behavioral detections. 
+This approach is aligned with NIST SP 800-61 and SP 800-137 by supporting continuous monitoring, early detection, and effective incident response.
+    </div>
+</div>
+
+<!-- GRADING RUBRIC -->
+<div class="card">
+    <h2>📊 Grading Rubric (100 Marks)</h2>
+
+    <table>
+        <tr>
+            <th>Criteria</th>
+            <th>Marks</th>
+            <th>What the Instructor Looks For</th>
+        </tr>
+        <tr>
+            <td>Monitored Systems & Data Sources</td>
+            <td>30</td>
+            <td>Mentions endpoints, network, identity/cloud, email; explains why these are monitored.</td>
+        </tr>
+        <tr>
+            <td>Tools & Technologies</td>
+            <td>30</td>
+            <td>Names and correctly positions SIEM, EDR/XDR, IDS/IPS (or similar), with clear roles.</td>
+        </tr>
+        <tr>
+            <td>False Positives / False Negatives Strategy</td>
+            <td>25</td>
+            <td>Shows understanding of tuning, coverage, correlation, and continuous improvement.</td>
+        </tr>
+        <tr>
+            <td>NIST / Best Practice Alignment</td>
+            <td>10</td>
+            <td>References NIST SP 800-61 / 800-137 or incident response best practice.</td>
+        </tr>
+        <tr>
+            <td>Clarity & Structure</td>
+            <td>5</td>
+            <td>Well written, coherent, within the word limit, clean formatting.</td>
+        </tr>
+    </table>
+</div>
+
+<!-- PRE-SUBMISSION CHECKLIST -->
+<div class="card">
+    <h2>✅ Pre-Submission Checklist</h2>
+    <p>Before you submit your homework, confirm:</p>
+    <ul>
+        <li>You described the environment (size, type of systems).</li>
+        <li>You listed key log sources and why they matter.</li>
+        <li>You mentioned at least one SIEM + one EDR/XDR + one network or cloud component.</li>
+        <li>You clearly explained how you reduce false positives and false negatives.</li>
+        <li>You referenced NIST or “best practice incident response / continuous monitoring”.</li>
+        <li>Your answer is roughly 180–220 words and reads like a short professional proposal.</li>
+    </ul>
+</div>
+
+<!-- SUBMISSION INSTRUCTIONS -->
+<div class="card">
+    <h2>📤 Submission Instructions</h2>
+    <ul>
+        <li>Open: <b>Homework 04.01 - DFIR Detection Monitoring Plan.docx</b></li>
+        <li>Paste your final answer into the document in the correct section.</li>
+        <li>Save the file as: <b>DFIR301_HW04.01_YourName.docx</b></li>
+        <li>Submit using the platform or email specified by your instructor.</li>
+    </ul>
+</div>
+
+<!-- MOTIVATIONAL QUOTE (ARABIC) -->
+<div class="card">
+    <h2>✨ Motivation</h2>
+    <p class="quote-ar">
+        "كل ساعة تقضيها في الفهم اليوم، توفر عليك أياماً من الفوضى في الغد."
+    </p>
+    <p class="quote-en">
+        “Every hour you spend understanding today saves you days of chaos tomorrow.”
+    </p>
+</div>
+
+</div>
+
+<footer>
+    © 2025 DFIR301 – Detection & Monitoring • Skunkworks Africa
+</footer>
+
+</body>
+</html>
