@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Raydo's Tab Dashboard</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      margin: 0;
+      padding: 2rem;
+      background: #f4f6f8;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .tab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .tab-card {
+      background: white;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+      transition: transform 0.2s ease;
+    }
+    .tab-card:hover {
+      transform: scale(1.02);
+    }
+    .tab-card h2 {
+      font-size: 1.1rem;
+      margin: 0 0 0.5rem;
+    }
+    .tab-card a {
+      color: #0078d4;
+      text-decoration: none;
+      word-break: break-word;
+    }
+    .current {
+      border-left: 4px solid #0078d4;
+    }
+  </style>
+</head>
+<body>
+  <h1>Raydo's Active Browser Tabs</h1>
+  <div class="tab-grid">
+    <div class="tab-card current">
+      <h2>Current Tab</h2>
+      <p>No title available</p>
+      <a href="#">No URL available</a>
+    </div>
+    <div class="tab-card">
+      <h2>Skillable Storefront for Microsoft Partners - Order #13943</h2>
+      <a href="https://msft-ilt.skillable.com/account.php?action=view_order&order_id=13943" target="_blank">View Tab</a>
+    </div>
+    <div class="tab-card">
+      <h2>roadmaps sh - Search</h2>
+      <a href="https://www.bing.com/search" target="_blank">View Tab</a>
+    </div>
+    <div class="tab-card">
+      <h2>Skunkworks AZ-400 DevOps Accelerator | Microsoft</h2>
+      <a href="https://skunkworks-academy.github.io/Microsoft/AZ-400" target="_blank">View Tab</a>
+    </div>
+    <div class="tab-card">
+      <h2>ms-102</h2>
+      <a href="https://skunkworks-academy.github.io/ms-102" target="_blank">View Tab</a>
+    </div>
+    <div class="tab-card">
+      <h2>3-Month Skills-Building & Prototype Development – Tyrese - roadmap.sh</h2>
+      <a href="https://roadmap.sh/r/3-month-skills-building--prototype-development--tyrese?t=66b801f9b64402e05261de77" target="_blank">View Tab</a>
+    </div>
+    <div class="tab-card">
+      <h2>Team Activity | Skunkworks</h2>
+      <a href="https://roadmap.sh/teams/66b801f9b64402e05261de77/activity" target="_blank">View Tab</a>
+    </div>
+    <div class="tab-card">
+      <h2>Anwar Shabaaz - Skillable TMS</h2>
+      <a href="https://alh.learnondemand.net/User/5370771" target="_blank">View Tab</a>
+    </div>
+    <div class="tab-card">
+      <h2>getting started with github - Search</h2>
+      <a href="https://www.bing.com/search" target="_blank">View Tab</a>
+    </div>
+  </div>
+</body>
+</html>
